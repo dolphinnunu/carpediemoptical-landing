@@ -1,0 +1,2149 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Carpe Diem Optical designs and manufactures premium eyewear for global brands, with OEM and ODM support, sampling, and international delivery.">
+<title>Carpe Diem Optical | Premium Eyewear Manufacturing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   BAUHAUS DESIGN TOKENS & BASE SYSTEM
+   ============================================ */
+:root {
+  /* Brand Colors */
+  --bau-red: #D02020;
+  --bau-blue: #1040C0;
+  --bau-yellow: #F0C020;
+  --bau-black: #121212;
+  --bau-white: #FFFFFF;
+  --bau-canvas: #F0F0F0;
+  --bau-canvas-light: #F8F8F8;
+  --bau-light-yellow: #FFF9C4;
+  --bau-dark: #1A1A1A;
+
+  /* Typography */
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Spacing Scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --space-5xl: 128px;
+
+  /* Borders */
+  --border-thin: 2px solid var(--bau-black);
+  --border-thick: 4px solid var(--bau-black);
+
+  /* Shadows 閳?Hard offset only, NO blur */
+  --shadow-sm: 3px 3px 0 var(--bau-black);
+  --shadow-md: 4px 4px 0 var(--bau-black);
+  --shadow-lg: 6px 6px 0 var(--bau-black);
+  --shadow-xl: 8px 8px 0 var(--bau-black);
+
+  /* Layout */
+  --max-width: 1280px;
+  --header-height: 72px;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--bau-black);
+  background: var(--bau-white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul, ol { list-style: none; }
+
+/* ============================================
+   HEADER / NAVIGATION
+   ============================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--bau-white);
+  border-bottom: var(--border-thin);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-lg);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.geo-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.geo-logo .geo-circle {
+  width: 28px; height: 28px;
+  background: var(--bau-red);
+  border-radius: 50%;
+  border: var(--border-thin);
+}
+.geo-logo .geo-square {
+  width: 28px; height: 28px;
+  background: var(--bau-blue);
+  border: var(--border-thin);
+}
+.geo-logo .geo-triangle {
+  width: 0; height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 24px solid var(--bau-yellow);
+  filter: drop-shadow(2px 2px 0 var(--bau-black));
+}
+.logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-xl);
+}
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--bau-blue); }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* ============================================
+   BUTTON SYSTEM
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family);
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 12px 32px;
+  height: 56px;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none !important;
+}
+
+.btn-primary {
+  background: var(--bau-red);
+  color: var(--bau-white);
+  border: var(--border-thin);
+  box-shadow: var(--shadow-md);
+}
+.btn-primary:hover { background: #B81A1A; }
+
+.btn-outline {
+  background: var(--bau-white);
+  color: var(--bau-black);
+  border: var(--border-thin);
+  box-shadow: var(--shadow-md);
+}
+.btn-outline:hover { background: var(--bau-canvas); }
+
+.btn-small {
+  font-size: 16px;
+  height: 44px;
+  padding: 8px 24px;
+}
+
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bau-black);
+  border-bottom: 2px solid var(--bau-red);
+  transition: gap 0.15s;
+}
+.btn-link:hover { gap: 10px; }
+
+/* ============================================
+   HERO SECTION 閳?50/50 split (matches reference)
+   ============================================ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+}
+
+.hero-left {
+  background: var(--bau-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-3xl) var(--space-3xl);
+  position: relative;
+  overflow: hidden;
+  border-right: var(--border-thick); /* 鏉╃偟鐢绘鎴ｇ珶 */
+}
+/* Small yellow circle accent 閳?top-left corner only */
+.hero-left::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 140px; height: 140px;
+  background: var(--bau-yellow);
+  border-radius: 50%;
+}
+
+.hero-title {
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.hero-right {
+  background: var(--bau-blue);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Dot pattern overlay */
+.hero-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.22) 2.5px, transparent 2.5px);
+  background-size: 18px 18px;
+}
+
+/* === Hero Right 閳?Reference composition (enlarged & centered) === */
+/* Red DIAMOND as base shape */
+.hr-diamond {
+  position: absolute;
+  width: 260px; height: 260px;
+  background: var(--bau-red);
+  border: var(--border-thick);
+  bottom: 20px; left: 50%;
+  transform: translateX(-65%) rotate(42deg);
+  z-index: 1;
+}
+/* Large YELLOW CIRCLE overlapping diamond */
+.hr-circle {
+  position: absolute;
+  width: 220px; height: 220px;
+  background: var(--bau-yellow);
+  border-radius: 50%;
+  border: var(--border-thick);
+  top: 50px; left: 55%;
+  transform: translateX(-18%);
+  z-index: 2;
+}
+/* WHITE SQUARE with black triangle inside */
+.hr-square {
+  position: absolute;
+  width: 150px; height: 150px;
+  background: var(--bau-white);
+  border: var(--border-thick);
+  bottom: 55px; left: 58%;
+  transform: translateX(-10%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hr-inner-tri {
+  width: 0; height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 34px solid var(--bau-black);
+}
+
+/* ============================================
+   UNIFIED 2鑴? GRID 閳?Hero bottom + brand merged
+   ONE continuous grid, NOT two separate sections!
+   ============================================ */
+.uni-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ug-cell { position: relative; overflow: hidden; }
+
+/* TL: white 閳?title + body + buttons + avatars */
+.ug-tl {
+  background: var(--bau-white);
+  padding: var(--space-2xl) var(--space-3xl);
+  border-right: var(--border-thick);
+  border-bottom: var(--border-thick);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+/* TR: blue dot pattern 閳?RED DIAMOND + yellow circle + white square(black tri) */
+.ug-tr {
+  background: var(--bau-blue);
+  border-bottom: var(--border-thick);
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* BL: solid red 閳?white circle + black square + yellow semicircle + diagonal bar */
+.ug-bl {
+  background: var(--bau-red);
+  border-right: var(--border-thick);
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* BR: white 閳?heading + body text + three color dots at bottom */
+.ug-br {
+  background: var(--bau-white);
+  padding: var(--space-4xl) var(--space-3xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* --- TL cell --- */
+.ug-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-lg);
+}
+.ug-body-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  border-left: 3px solid var(--bau-red);
+  padding-left: var(--space-md);
+  margin-bottom: var(--space-lg);
+  max-width: 440px;
+}
+.hg-buttons { display: flex; gap: var(--space-md); margin-bottom: var(--space-lg); }
+
+.avatars { display: flex; align-items: center; gap: var(--space-sm); }
+.avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: var(--border-thin);
+  background: var(--bau-canvas);
+  overflow: hidden;
+  margin-left: -10px;
+}
+.avatar:first-child { margin-left: 0; }
+.avatar-text {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #333;
+}
+
+/* --- TR cell: Blue dot pattern + composition (original 3-shape) --- */
+.ug-tr::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.22) 2.5px, transparent 2.5px);
+  background-size: 18px 18px;
+}
+.ug-tr-shapes { position: relative; width: 300px; height: 260px; z-index: 1; }
+/* Red diamond (rotated square) 閳?base shape, large */
+.ug-tr-diamond {
+  position: absolute;
+  width: 200px; height: 200px;
+  background: var(--bau-red);
+  border: var(--border-thick);
+  bottom: 20px; left: 10px;
+  transform: rotate(45deg);
+  z-index: 1;
+}
+/* Yellow circle overlapping diamond top-right */
+.ug-tr-circle {
+  position: absolute;
+  width: 160px; height: 160px;
+  background: var(--bau-yellow);
+  border-radius: 50%;
+  border: var(--border-thick);
+  top: 0; right: 30px;
+  z-index: 2;
+}
+/* White square with black triangle inside 閳?centered on top of both */
+.ug-tr-square {
+  position: absolute;
+  width: 120px; height: 120px;
+  background: var(--bau-white);
+  border: var(--border-thick);
+  bottom: 50px; right: 70px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ug-tr-inner-tri {
+  width: 0; height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 26px solid var(--bau-black);
+}
+
+/* --- BL cell: Red bg composition --- */
+.ug-bl-shapes { position: relative; width: 260px; height: 220px; }
+.ug-bl-circle {
+  position: absolute;
+  width: 100px; height: 100px;
+  background: var(--bau-white);
+  border-radius: 50%;
+  border: var(--border-thick);
+  top: 30px; left: 20px;
+  z-index: 3;
+}
+.ug-bl-square {
+  position: absolute;
+  width: 90px; height: 90px;
+  background: var(--bau-black);
+  border: var(--border-thick);
+  top: 45px; left: 100px;
+  z-index: 2;
+}
+.ug-bl-semicircle {
+  position: absolute;
+  width: 100px; height: 50px;
+  background: var(--bau-yellow);
+  border: var(--border-thick) var(--border-thick) 0 var(--border-thick);
+  border-radius: 0 0 50px 50px;
+  bottom: 30px; left: 50px;
+  z-index: 2;
+}
+.ug-bl-bar {
+  position: absolute;
+  width: 170px; height: 16px;
+  background: var(--bau-black);
+  top: 90px; left: 30px;
+  transform: rotate(-35deg);
+  z-index: 4;
+}
+
+/* --- BR cell: White 閳?heading + body paragraphs + color dots --- */
+.ug-br-heading {
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-lg);
+  max-width: 520px;
+}
+.ug-br-body {
+  border-left: 3px solid var(--bau-blue);
+  padding-left: var(--space-md);
+  margin-bottom: var(--space-md);
+  max-width: 580px;
+}
+.ug-br-body p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: var(--space-md);
+}
+.ug-br-body p:last-child { margin-bottom: 0; }
+/* Three color dots at bottom of BR cell */
+.ug-br-dots {
+  display: flex;
+  gap: 12px;
+  margin-top: var(--space-xl);
+}
+.ug-dot-blue {
+  width: 32px; height: 32px;
+  background: var(--bau-blue);
+  border-radius: 50%;
+  border: var(--border-thin);
+}
+.ug-dot-yellow {
+  width: 32px; height: 32px;
+  background: var(--bau-yellow);
+  border: var(--border-thin);
+}
+.ug-dot-red {
+  width: 32px; height: 32px;
+  background: var(--bau-red);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+/* ============================================
+   STATS SECTION 閳?Yellow 4-col (HIGH IMPACT)
+   ============================================ */
+.stats-section {
+  background: var(--bau-yellow);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat-item {
+  padding: var(--space-4xl) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-right: var(--border-thin);
+}
+.stat-item:last-child { border-right: none; }
+
+.stat-badge {
+  width: 72px; height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-thick);
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--bau-white);
+  margin-bottom: var(--space-xl);
+}
+.stat-badge.circle { border-radius: 50%; background: var(--bau-red); }
+.stat-badge.square { border-radius: 0; background: var(--bau-blue); }
+.stat-badge.diamond { 
+  background: var(--bau-yellow); 
+  color: var(--bau-black);
+  transform: rotate(45deg); 
+}
+.stat-badge.diamond span { transform: rotate(-45deg); display: block; }
+
+.stat-number {
+  font-size: clamp(40px, 5vw, 56px);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.02em;
+}
+.stat-label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(0,0,0,0.6);
+}
+
+/* ============================================
+   SECTION HEADING STYLE
+   ============================================ */
+.section-header {
+  text-align: center;
+  padding: var(--space-4xl) var(--space-lg) var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.section-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.section-subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: var(--space-md);
+  opacity: 0.7;
+}
+
+.section-title-underlined {
+  padding-bottom: var(--space-md);
+  border-bottom: 3px solid var(--bau-white);
+  display: inline-block;
+}
+
+/* ============================================
+   BLOG SECTION 閳?Blue bg, 3 cards
+   ============================================ */
+.blog-section {
+  background: var(--bau-blue);
+  padding: var(--space-4xl) var(--space-lg);
+}
+
+.blog-grid {
+  max-width: var(--max-width);
+  margin: var(--space-lg) auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.blog-card {
+  background: var(--bau-white);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.blog-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 var(--bau-black);
+}
+
+.blog-img-wrapper {
+  overflow: hidden;
+  padding: var(--space-md);
+  background: var(--bau-canvas);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+}
+/* Alternating image container shapes */
+.blog-card:nth-child(1) .blog-img-wrapper,
+.blog-card:nth-child(3) .blog-img-wrapper {
+  /* pill/rounded shape */
+}
+.blog-card:nth-child(1) .blog-img-inner,
+.blog-card:nth-child(3) .blog-img-inner {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 9999px;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+.blog-card:nth-child(2) .blog-img-inner {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+.blog-card:hover .blog-img-inner { filter: grayscale(0%); }
+
+.blog-body {
+  padding: var(--space-lg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.blog-meta {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+.blog-meta .date { color: var(--bau-red); }
+.blog-meta .author { color: #666; }
+.blog-card-title {
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.3;
+  margin-bottom: auto;
+}
+.blog-link {
+  margin-top: var(--space-md);
+}
+
+/* ============================================
+   FEATURES SECTION 閳?Gray bg, 3-col cards
+   ============================================ */
+.features-section {
+  background: var(--bau-canvas);
+  padding: var(--space-4xl) var(--space-lg);
+  position: relative;
+  overflow: hidden;
+}
+/* Large faint diamond decoration */
+.features-section::after {
+  content: '';
+  position: absolute;
+  right: -40px; bottom: -40px;
+  width: 240px; height: 240px;
+  border: 3px solid rgba(16, 64, 192, 0.15);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.features-grid {
+  max-width: var(--max-width);
+  margin: var(--space-lg) auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.feature-card {
+  background: var(--bau-white);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-xl);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+}
+.feature-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 var(--bau-black);
+}
+
+/* Corner geometric decoration on cards */
+.fc-icon-box {
+  width: 56px; height: 56px;
+  border: var(--border-thick);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+  flex-shrink: 0;
+}
+.fc-icon-box svg { width: 28px; height: 28px; stroke: var(--bau-black); stroke-width: 2.5; fill: none; }
+
+.fc-dot {
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+}
+.fc-dot.red { background: var(--bau-red); }
+.fc-dot.blue { background: var(--bau-blue); }
+.fc-dot.yellow { background: var(--bau-yellow); }
+
+.fc-title {
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+}
+.fc-desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #444;
+}
+
+/* ============================================
+   HOW IT WORKS 閳?Steps (white bg)
+   ============================================ */
+.steps-section {
+  background: var(--bau-white);
+  padding: var(--space-4xl) var(--space-lg);
+}
+
+.steps-grid {
+  max-width: var(--max-width);
+  margin: var(--space-lg) auto 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+
+.step-item {
+  text-align: left;
+  padding: var(--space-xl);
+  background: var(--bau-canvas);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-md);
+}
+.step-num {
+  width: 56px; height: 56px;
+  margin: 0 0 var(--space-lg);
+  border: var(--border-thick);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 900;
+}
+.step-num.red-bg { background: var(--bau-red); color: var(--bau-white); border-radius: 50%; }
+.step-num.blue-bg { background: var(--bau-blue); color: var(--bau-white); }
+.step-num.yellow-bg { background: var(--bau-yellow); color: var(--bau-black); transform: rotate(45deg); }
+.step-num.yellow-bg span { transform: rotate(-45deg); display: block; }
+.step-title {
+  font-size: 17px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-sm);
+}
+.step-desc {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ============================================
+   WHY CHOOSE US 閳?Red section cards
+   ============================================ */
+.benefits-section {
+  background: var(--bau-red);
+  padding: var(--space-4xl) var(--space-lg);
+}
+.benefits-grid {
+  max-width: var(--max-width);
+  margin: var(--space-lg) auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+.benefit-card {
+  background: var(--bau-white);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-xl);
+  position: relative;
+}
+.benefit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 72px;
+  height: 6px;
+  background: var(--bau-yellow);
+}
+.benefit-title {
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+}
+.benefit-desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #333;
+}
+
+/* ============================================
+   TESTIMONIALS 閳?Light gray
+   ============================================ */
+.testimonials-section {
+  background: var(--bau-canvas);
+  padding: var(--space-4xl) var(--space-lg);
+}
+.t-grid {
+  max-width: var(--max-width);
+  margin: var(--space-lg) auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+.t-card {
+  background: var(--bau-white);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-xl);
+  position: relative;
+}
+.t-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 56px;
+  height: 56px;
+  background: var(--bau-yellow);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+.t-quote {
+  font-size: 17px;
+  line-height: 1.7;
+  font-style: italic;
+  margin-bottom: var(--space-lg);
+  color: #333;
+  max-width: 28ch;
+}
+.t-author {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.t-role {
+  font-size: 13px;
+  color: #666;
+}
+
+/* ============================================
+   PRICING 閳?Yellow bg
+   ============================================ */
+.pricing-section {
+  background: var(--bau-light-yellow);
+  padding: var(--space-4xl) var(--space-lg);
+}
+.pricing-grid {
+  max-width: var(--max-width);
+  margin: var(--space-lg) auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  align-items: start;
+}
+.price-card {
+  background: var(--bau-white);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-2xl);
+  min-height: 100%;
+}
+.price-card.featured {
+  background: var(--bau-red);
+  color: var(--bau-white);
+  transform: translateY(-16px);
+  box-shadow: 10px 10px 0 var(--bau-black);
+}
+.price-name {
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+.price-amount {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: var(--space-lg);
+}
+.price-feature-list {
+  list-style: none;
+  margin-bottom: var(--space-xl);
+}
+.price-feature-list li {
+  padding: 8px 0;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.price-card.featured .price-feature-list li {
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* ============================================
+   FAQ ACCORDION 閳?White bg
+   ============================================ */
+.faq-section {
+  background: var(--bau-white);
+  padding: var(--space-4xl) var(--space-lg);
+}
+.faq-container {
+  max-width: 720px;
+  margin: var(--space-lg) auto 0;
+}
+.faq-item {
+  border: var(--border-thin);
+  margin-bottom: -2px;
+}
+.faq-question {
+  width: 100%;
+  padding: var(--space-lg);
+  background: var(--bau-white);
+  border: none;
+  text-align: left;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.2s;
+}
+.faq-question.open {
+  background: var(--bau-red);
+  color: var(--bau-white);
+  box-shadow: var(--shadow-md);
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  background: var(--bau-light-yellow);
+  transition: max-height 0.3s ease;
+}
+.faq-answer-inner {
+  padding: var(--space-lg);
+  font-size: 15px;
+  line-height: 1.7;
+}
+.faq-item.active .faq-answer {
+  max-height: 400px;
+}
+.faq-icon {
+  font-size: 24px;
+  font-weight: 900;
+  transition: transform 0.3s;
+}
+.faq-item.active .faq-icon { transform: rotate(45deg); }
+
+/* ============================================
+   CTA SECTION 閳?Yellow with large shapes
+   ============================================ */
+.cta-section {
+  background: var(--bau-yellow);
+  padding: var(--space-4xl) var(--space-lg);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+.cta-deco-circle {
+  position: absolute;
+  width: 384px; height: 384px;
+  border-radius: 50%;
+  background: var(--bau-red);
+  opacity: 0.85;
+  left: -100px; top: 50%; transform: translateY(-50%);
+}
+.cta-deco-square {
+  position: absolute;
+  width: 384px; height: 384px;
+  background: var(--bau-blue);
+  opacity: 0.5;
+  right: -100px; top: 50%; transform: translateY(-50%);
+}
+.cta-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.cta-title {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: var(--space-xl);
+}
+
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+.contact-section {
+  background: var(--bau-canvas);
+  padding: var(--space-4xl) var(--space-lg);
+}
+.contact-shell {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: var(--space-3xl);
+  align-items: stretch;
+}
+.contact-panel,
+.contact-card {
+  background: var(--bau-white);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-xl);
+}
+.contact-panel {
+  padding: var(--space-3xl);
+}
+.contact-kicker {
+  display: inline-block;
+  margin-bottom: var(--space-md);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bau-red);
+}
+.contact-title {
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 0.98;
+  margin-bottom: var(--space-lg);
+}
+.contact-copy {
+  max-width: 620px;
+  margin-bottom: var(--space-xl);
+  font-size: 18px;
+  line-height: 1.7;
+  color: #333;
+}
+.contact-points {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+.contact-point {
+  padding-top: var(--space-lg);
+  border-top: 4px solid var(--bau-black);
+}
+.contact-point h4 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.contact-point p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #444;
+}
+.contact-card {
+  padding: var(--space-2xl);
+  background:
+    linear-gradient(135deg, rgba(240,192,32,0.2), rgba(240,192,32,0) 32%),
+    var(--bau-white);
+}
+.contact-card-title {
+  font-size: 24px;
+  margin-bottom: var(--space-lg);
+}
+.contact-list {
+  display: grid;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+.contact-list-item {
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid #d8d8d8;
+}
+.contact-list-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.contact-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #666;
+}
+.contact-value,
+.contact-value a {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--bau-black);
+}
+.contact-note {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* ============================================
+   FOOTER 閳?Dark
+   ============================================ */
+.footer {
+  background: var(--bau-dark);
+  color: var(--bau-white);
+  padding: var(--space-4xl) var(--space-lg) var(--space-xl);
+  position: relative;
+}
+/* Tri-color gradient top line */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--bau-red) 33%, var(--bau-blue) 33%, var(--bau-blue) 66%, var(--bau-yellow) 66%);
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-3xl);
+}
+.footer-brand .logo-text { color: var(--bau-white); margin-bottom: var(--space-md); }
+.footer-brand p {
+  font-size: 14px;
+  color: #999;
+  line-height: 1.7;
+  max-width: 320px;
+}
+.footer-col h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-lg);
+  color: var(--bau-white);
+}
+.footer-col ul li { margin-bottom: var(--space-sm); }
+.footer-col a {
+  font-size: 14px;
+  color: #888;
+  transition: color 0.15s, padding-left 0.15s;
+  display: inline-block;
+}
+.footer-col a:hover { color: var(--bau-white); padding-left: 6px; }
+
+.footer-bottom {
+  max-width: var(--max-width);
+  margin: var(--space-3xl) auto 0;
+  padding-top: var(--space-lg);
+  border-top: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #666;
+}
+.footer-signature {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.fs-dot { width: 12px; height: 12px; border-radius: 50%; }
+.fs-dot.r { background: var(--bau-red); }
+.fs-dot.b { background: var(--bau-blue); border-radius: 0; }
+.fs-dot.y { 
+  width: 0; height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 10px solid var(--bau-yellow);
+}
+
+/* ============================================
+   SPONSORS SECTION 閳?Shape-as-Container design
+   ============================================ */
+.sponsors-section {
+  background: var(--bau-canvas);
+  padding: var(--space-4xl) var(--space-lg);
+}
+.sponsor-grid {
+  max-width: 1000px;
+  margin: var(--space-2xl) auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+}
+.sponsor-card {
+  background: var(--bau-white);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* === LEFT CARD: Large Circle Container with Red Arcs === */
+.sc-img-area {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+}
+.sc-img-circle {
+  position: relative;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  border: 5px solid var(--bau-black);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-xl);
+  overflow: hidden;
+}
+/* Red arc decorations on left/right edges of circle */
+.sc-img-circle::before,
+.sc-img-circle::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 28px;
+  background: var(--bau-red);
+  z-index: 1;
+}
+.sc-img-circle::before { left: -5px; border-radius: 50% 0 0 50%; }
+.sc-img-circle::after { right: -5px; border-radius: 0 50% 50% 0; }
+
+/* Content inside the circle */
+.sc-circle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-md);
+  position: relative; z-index: 2;
+}
+.sc-circle-brand {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--bau-white);
+}
+.sc-circle-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: #333;
+  background: var(--bau-white);
+  padding: 4px 12px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+.sc-circle-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #B088F9;
+  line-height: 1.2;
+  margin-bottom: var(--space-sm);
+  position: relative; z-index: 2;
+}
+.sc-circle-desc {
+  font-size: 12px;
+  color: #aaa;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+  position: relative; z-index: 2;
+}
+.sc-circle-link {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: var(--space-md);
+  position: relative; z-index: 2;
+}
+/* Tech stack pills inside circle */
+.sc-circle-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  position: relative; z-index: 2;
+}
+.sc-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  background: rgba(255,255,255,0.12);
+  color: #ccc;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* === RIGHT CARD: Blue Thick Border Rounded Rect Container === */
+.sc-img-rect-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+}
+.sc-img-rect {
+  width: 280px; height: 220px;
+  border-radius: 24px;
+  background: #222;
+  /* Thick blue border like reference */
+  border: 10px solid var(--bau-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+.sc-plus-icon {
+  width: 64px; height: 64px;
+  opacity: 0.35;
+  color: #fff;
+}
+.sc-rect-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #999;
+}
+.sc-rect-subtitle {
+  font-size: 13px;
+  color: #666;
+}
+
+.sc-body { 
+  text-align: center; 
+  width: 100%;
+}
+.sc-title {
+  font-size: 26px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+  line-height: 1.1;
+}
+.sc-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { min-height: 400px; }
+  .uni-grid { grid-template-columns: 1fr; }
+  .ug-tl, .ug-tr, .ug-bl, .ug-br { border-right: none !important; border-bottom: var(--border-thick); }
+  .ug-br { border-bottom: none; }
+  .stats-section { grid-template-columns: repeat(2, 2fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item:nth-child(odd) { border-right: var(--border-thin); }
+  .blog-grid, .features-grid, .benefits-grid, .t-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-shell,
+  .contact-points { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    position: static;
+    padding: 10px 12px;
+    height: auto;
+  }
+  .header-inner { flex-wrap: wrap; gap: 10px; align-items: center; }
+  .nav-links { display: none; }
+  .logo-group { gap: 8px; }
+  .geo-logo { gap: 4px; }
+  .geo-logo .geo-circle,
+  .geo-logo .geo-square {
+    width: 22px;
+    height: 22px;
+  }
+  .geo-logo .geo-triangle {
+    border-left-width: 11px;
+    border-right-width: 11px;
+    border-bottom-width: 18px;
+  }
+  .logo-text { display: none; }
+  .header-actions { width: auto; justify-content: flex-end; margin-left: auto; }
+  .header-actions .btn-outline { display: none; }
+  .header-actions .btn {
+    height: 42px;
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+  .hero-left {
+    padding: 34px 20px 28px;
+    min-height: 210px;
+  }
+  .hero-left::before {
+    top: -90px;
+    left: -92px;
+    width: 118px;
+    height: 118px;
+  }
+  .hero-title {
+    font-size: 34px;
+    line-height: 0.94;
+    max-width: 260px;
+  }
+  .hero-right { min-height: 400px; }
+  .hr-diamond {
+    width: 220px;
+    height: 220px;
+    left: 46%;
+    bottom: 12px;
+  }
+  .hr-circle {
+    width: 188px;
+    height: 188px;
+    top: 54px;
+    left: 55%;
+  }
+  .hr-square {
+    width: 118px;
+    height: 118px;
+    bottom: 56px;
+    left: 58%;
+  }
+  .hr-inner-tri {
+    border-left-width: 16px;
+    border-right-width: 16px;
+    border-bottom-width: 28px;
+  }
+  .ug-tl,
+  .ug-br {
+    padding: 28px 20px;
+  }
+  .ug-tr,
+  .ug-bl {
+    min-height: 260px;
+  }
+  .ug-body-text {
+    max-width: none;
+    font-size: 14px;
+  }
+  .hg-buttons { flex-direction: column; align-items: stretch; }
+  .hg-buttons .btn { width: 100%; }
+  .avatars { flex-wrap: wrap; gap: 10px; }
+  .avatar {
+    width: 36px;
+    height: 36px;
+  }
+  .avatar-text { font-size: 12px; line-height: 1.35; }
+  .uni-grid { grid-template-columns: 1fr; }
+  .ug-tl, .ug-tr, .ug-bl, .ug-br { border-right: none !important; border-bottom: var(--border-thin); }
+  .ug-br { border-bottom: none; }
+  .section-header {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 64px;
+    padding-bottom: 24px;
+  }
+  .stats-section { grid-template-columns: 1fr; }
+  .stat-item { border-right: none !important; border-bottom: var(--border-thin); }
+  .stat-item:last-child { border-bottom: none; }
+  .blog-grid, .features-grid, .benefits-grid, .t-grid, .pricing-grid, .sponsor-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .contact-panel,
+  .contact-card { padding: var(--space-xl); }
+  .btn { font-size: 16px; padding: 10px 24px; height: 48px; }
+  .ug-br-heading { font-size: 28px; }
+  .ug-title { font-size: 36px; }
+  .footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+</style>
+</head>
+<body id="top">
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo-group">
+      <div class="geo-logo">
+        <div class="geo-circle"></div>
+        <div class="geo-square"></div>
+        <div class="geo-triangle"></div>
+      </div>
+      <span class="logo-text">CARPE DIEM OPTICAL</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#products">Products</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+    <a href="#contact" class="btn btn-primary btn-small">CONTACT SALES</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-left">
+    <h1 class="hero-title">Premium<br>Eyewear<br>For Global<br>Brands</h1>
+  </div>
+  <div class="hero-right">
+    <div class="hr-diamond"></div>
+    <div class="hr-circle"></div>
+    <div class="hr-square">
+      <div class="hr-inner-tri"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== UNIFIED 2鑴? GRID (Hero bottom + brand merged) ===== -->
+<div class="uni-grid">
+  <!-- TL: White 閳?buttons + avatars ONLY (title lives in hero) -->
+  <div class="ug-cell ug-tl">
+    <p class="ug-body-text">Carpe Diem Optical helps brands source premium eyewear with OEM and ODM support, practical production planning, and dependable international delivery.</p>
+    <div class="hg-buttons">
+      <a href="#contact" class="btn btn-primary btn-small">REQUEST A QUOTE</a>
+      <a href="#solutions" class="btn btn-outline btn-small">VIEW CAPABILITIES</a>
+    </div>
+    <div class="avatars">
+      <div class="avatar" style="background:#e8c4b8;"></div>
+      <div class="avatar" style="background:#c4d8e8;"></div>
+      <div class="avatar" style="background:#d8e8c4;"></div>
+      <div class="avatar" style="background:#e8d8c4;"></div>
+      <span class="avatar-text">TRUSTED BY OPTICAL BRANDS WORLDWIDE</span>
+    </div>
+  </div>
+
+  <!-- TR: Blue dot pattern 閳?empty, geometry lives in hero -->
+  <div class="ug-cell ug-tr">
+  </div>
+
+  <!-- BL: Red 閳?white circle + black square + yellow semicircle + diagonal bar -->
+  <div class="ug-cell ug-bl">
+    <div class="ug-bl-shapes">
+      <div class="ug-bl-circle"></div>
+      <div class="ug-bl-square"></div>
+      <div class="ug-bl-semicircle"></div>
+      <div class="ug-bl-bar"></div>
+    </div>
+  </div>
+
+  <!-- BR: White 閳?heading + body paragraphs + three color dots -->
+  <div class="ug-cell ug-br">
+    <h3 class="ug-br-heading">From first concept to final cartons, Carpe Diem supports each stage of eyewear production.</h3>
+    <div class="ug-br-body">
+      <p>We guide brands from early ideas into approved samples, then into production with clear communication, practical guidance, and reliable timelines.</p>
+      <p>Our process is built for wholesale eyewear, including custom development, quality inspection, packaging support, and shipping to more than 60 countries.</p>
+    </div>
+    <div class="ug-br-dots">
+      <div class="ug-dot-blue"></div>
+      <div class="ug-dot-yellow"></div>
+      <div class="ug-dot-red"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STATS (Yellow 4-col) ===== -->
+<section class="stats-section">
+  <div class="stat-item">
+    <div class="stat-badge circle">1</div>
+    <div class="stat-number">300+</div>
+    <div class="stat-label">MOQ / Style</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-badge square">2</div>
+    <div class="stat-number">25-35d</div>
+    <div class="stat-label">Lead Time</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-badge diamond"><span>3</span></div>
+    <div class="stat-number">60+</div>
+    <div class="stat-label">Countries Served</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-badge circle" style="background:var(--bau-red)">4</div>
+    <div class="stat-number">2010</div>
+    <div class="stat-label">Founded</div>
+  </div>
+</section>
+
+<!-- ===== SPONSORS ===== -->
+<section class="sponsors-section">
+  <div class="section-header">
+    <h2 class="section-title">Why Brands Source With Us</h2>
+    <p class="section-subtitle">OEM and ODM support, quality control, and global fulfillment built for eyewear teams.</p>
+  </div>
+  <div class="sponsor-grid">
+    <!-- LEFT: Circle Container Card -->
+    <div class="sponsor-card">
+      <div class="sc-img-area">
+        <div class="sc-img-circle">
+          <div class="sc-circle-header">
+            <span class="sc-circle-brand">OEM / ODM</span>
+            <span class="sc-circle-pill">From concept to cartons</span>
+          </div>
+          <div class="sc-circle-title">Build collections<br>with confidence</div>
+          <div class="sc-circle-desc">Custom frame development, sampling, color matching, and production support for established and emerging optical brands.</div>
+          <div class="sc-circle-link">&gt; Sampling in progress...</div>
+          <div class="sc-circle-tags">
+            <span class="sc-tag">OEM</span>
+            <span class="sc-tag">ODM</span>
+            <span class="sc-tag">Sampling</span>
+            <span class="sc-tag">QC</span>
+            <span class="sc-tag">Packaging</span>
+            <span class="sc-tag">Shipping</span>
+            <span class="sc-tag">B2B</span>
+            <span class="sc-tag">Private Label</span>
+          </div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <h3 class="sc-title">Custom Collections</h3>
+        <p class="sc-desc">From acetate and metal frames to branded packaging and logistics, we help eyewear labels move from sketch to shipment with fewer handoffs.</p>
+        <a href="#contact" class="btn-link">Request Quote →</a>
+      </div>
+    </div>
+    <!-- RIGHT: Blue Border Rounded Rect Container Card -->
+    <div class="sponsor-card">
+      <div class="sc-img-rect-wrap">
+        <div class="sc-img-rect">
+          <svg class="sc-plus-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+          <span class="sc-rect-title">Your Brand Here</span>
+          <span class="sc-rect-subtitle">Private label support</span>
+        </div>
+      </div>
+      <div class="sc-body">
+        <h3 class="sc-title">Launch With Less Friction</h3>
+        <p class="sc-desc">Work with a team that understands wholesale eyewear, packaging, compliance, and the realities of international delivery.</p>
+        <a href="#contact" class="btn-link">Talk to Sales →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOG (Blue bg) ===== -->
+<section class="blog-section" id="products">
+  <div class="section-header" style="padding-top:0;">
+    <h2 class="section-title section-title-underlined">Notes From The<br>Production Floor</h2>
+  </div>
+  <div class="blog-grid">
+    <article class="blog-card">
+      <div class="blog-img-wrapper">
+        <img class="blog-img-inner" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjQ1MCIgZmlsbD0iI2Y2ZjZmMiIvPgogIDxjaXJjbGUgY3g9IjEyMCIgY3k9Ijk4IiByPSIzNCIgZmlsbD0iI2QwMjAyMCIvPgogIDxyZWN0IHg9IjE5MCIgeT0iNzIiIHdpZHRoPSIxMTAiIGhlaWdodD0iNTYiIHJ4PSIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTIxMjEyIiBzdHJva2Utd2lkdGg9IjEyIi8+CiAgPHJlY3QgeD0iMzE4IiB5PSI3MiIgd2lkdGg9IjExMCIgaGVpZ2h0PSI1NiIgcng9IjI4IiBmaWxsPSJub25lIiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iMTIiLz4KICA8cGF0aCBkPSJNMzAwIDEwMEgzMTgiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTE5MCA5MEgxMjgiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQyOCA5MEg0ODgiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHJlY3QgeD0iNDYwIiB5PSIxODAiIHdpZHRoPSIyMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjMTA0MEMwIiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iMTIiLz4KICA8Y2lyY2xlIGN4PSI1NDAiIGN5PSIyNDAiIHI9IjI4IiBmaWxsPSIjZjBjMDIwIi8+CiAgPHJlY3QgeD0iODAiIHk9IjIyMCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmY5YzQiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMiIvPgogIDxwb2x5Z29uIHBvaW50cz0iMTcwLDI0NCAxNDUsMjg4IDE5NSwyODgiIGZpbGw9IiMxMjEyMTIiLz4KPC9zdmc+" alt="Eyewear frame illustration">
+      </div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="date">2025-01-15</span> · <span class="author">Carpe Diem Team</span></div>
+        <h3 class="blog-card-title">Choosing the Right Frame Materials</h3>
+        <a href="#contact" class="btn-link blog-link">Request Sample →</a>
+      </div>
+    </article>
+    <article class="blog-card">
+      <div class="blog-img-wrapper">
+        <img class="blog-img-inner" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjQ1MCIgZmlsbD0iI2VlZjFmNCIvPgogIDxyZWN0IHg9IjYwIiB5PSI1MCIgd2lkdGg9IjY4MCIgaGVpZ2h0PSIzNTAiIHJ4PSIyOCIgZmlsbD0iI2Y4ZjhmOCIgc3Ryb2tlPSIjMTIxMjEyIiBzdHJva2Utd2lkdGg9IjEyIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMwIDExMCkiPgogICAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI4NiIgcng9IjQwIiBmaWxsPSIjZDAyMDIwIiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iMTAiLz4KICAgIDxyZWN0IHg9IjIxNCIgeT0iMCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI4NiIgcng9IjQwIiBmaWxsPSIjMTA0MGMwIiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iMTAiLz4KICAgIDxwYXRoIGQ9Ik0xODAgNDNIMjE0IiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTAgNDNILTU0IiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTM5NCA0M0g0NDgiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPC9nPgogIDxjaXJjbGUgY3g9IjU5MCIgY3k9IjI3MCIgcj0iNjIiIGZpbGw9IiNmMGMwMjAiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMiIvPgogIDxyZWN0IHg9IjE1MCIgeT0iMjQ1IiB3aWR0aD0iMTcwIiBoZWlnaHQ9Ijk0IiByeD0iMTQiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMiIvPgogIDxjaXJjbGUgY3g9IjIwNSIgY3k9IjI5MiIgcj0iMjAiIGZpbGw9IiMxMjEyMTIiLz4KICA8Y2lyY2xlIGN4PSIyNjUiIGN5PSIyOTIiIHI9IjIwIiBmaWxsPSIjMTIxMjEyIi8+Cjwvc3ZnPg==" alt="Eyewear sample boards">
+      </div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="date">2025-01-10</span> · <span class="author">Production Desk</span></div>
+        <h3 class="blog-card-title">What to Expect From Sampling</h3>
+        <a href="#contact" class="btn-link blog-link">Request Sample →</a>
+      </div>
+    </article>
+    <article class="blog-card">
+      <div class="blog-img-wrapper">
+        <img class="blog-img-inner" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMTIxMjEyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFhMWExYSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI0NTAiIGZpbGw9InVybCgjZykiLz4KICA8Y2lyY2xlIGN4PSIxMzAiIGN5PSIxMTAiIHI9IjU0IiBmaWxsPSIjZjBjMDIwIi8+CiAgPHJlY3QgeD0iMjEwIiB5PSI3OCIgd2lkdGg9IjEzNiIgaGVpZ2h0PSI3OCIgcng9IjM2IiBmaWxsPSIjZmZmIiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iMTAiLz4KICA8cmVjdCB4PSIzNjgiIHk9Ijc4IiB3aWR0aD0iMTM2IiBoZWlnaHQ9Ijc4IiByeD0iMzYiIGZpbGw9IiNkMDIwMjAiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMCIvPgogIDxyZWN0IHg9IjUyNiIgeT0iNzgiIHdpZHRoPSIxMzYiIGhlaWdodD0iNzgiIHJ4PSIzNiIgZmlsbD0iIzEwNDBjMCIgc3Ryb2tlPSIjMTIxMjEyIiBzdHJva2Utd2lkdGg9IjEwIi8+CiAgPHBhdGggZD0iTTM0NiAxMTZIMzY4TTUwNCAxMTZINTI2IiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxyZWN0IHg9IjEyMCIgeT0iMjI4IiB3aWR0aD0iNTYwIiBoZWlnaHQ9IjEzMCIgcng9IjIyIiBmaWxsPSIjZjBjMDIwIiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iMTIiLz4KICA8cGF0aCBkPSJNMTgwIDI5Mkg2MjAiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWRhc2hhcnJheT0iMTggMTgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjI0MCIgY3k9IjI5MiIgcj0iMzQiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMCIvPgogIDxjaXJjbGUgY3g9IjU2MCIgY3k9IjI5MiIgcj0iMzQiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMCIvPgo8L3N2Zz4=" alt="Eyewear shipping and distribution">
+      </div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="date">2025-01-05</span> · <span class="author">Logistics Team</span></div>
+        <h3 class="blog-card-title">Shipping Eyewear Across Markets</h3>
+        <a href="#contact" class="btn-link blog-link">Request Sample →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== FEATURES (Gray bg, 3鑴? cards) ===== -->
+<section class="features-section" id="solutions">
+  <div class="section-header">
+    <h2 class="section-title">Capabilities Built For Brand Teams</h2>
+    <p class="section-subtitle">The services buyers usually need before sampling, production, and shipment.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="fc-dot red"></div>
+      <div class="fc-icon-box">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
+      </div>
+      <h3 class="fc-title">Custom Frame Development</h3>
+      <p class="fc-desc">Work from sketches, reference images, or existing samples to create frames that fit your brand and market.</p>
+    </div>
+    <div class="feature-card">
+      <div class="fc-dot blue"></div>
+      <div class="fc-icon-box">
+        <svg viewBox="0 0 24 24"><polygon points="12,4 20,20 4,20"/></svg>
+      </div>
+      <h3 class="fc-title">Flexible MOQ</h3>
+      <p class="fc-desc">Support for smaller launches and larger wholesale runs, with MOQ guidance by material and frame style.</p>
+    </div>
+    <div class="feature-card">
+      <div class="fc-dot yellow"></div>
+      <div class="fc-icon-box">
+        <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14"/></svg>
+      </div>
+      <h3 class="fc-title">Material Sourcing</h3>
+      <p class="fc-desc">Source acetate, metal, lenses, packaging, and finishing details with consistent quality across batches.</p>
+    </div>
+    <div class="feature-card">
+      <div class="fc-dot red"></div>
+      <div class="fc-icon-box">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
+      </div>
+      <h3 class="fc-title">Global Shipping</h3>
+      <p class="fc-desc">Ship to more than 60 countries with DDP options available for major markets.</p>
+    </div>
+    <div class="feature-card">
+      <div class="fc-dot red"></div>
+      <div class="fc-icon-box">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3 class="fc-title">Quality Inspection</h3>
+      <p class="fc-desc">Production includes quality inspection and shipping checks before goods leave the factory.</p>
+    </div>
+    <div class="feature-card">
+      <div class="fc-dot red"></div>
+      <div class="fc-icon-box">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6m-3-3v6"/></svg>
+      </div>
+      <h3 class="fc-title">Packaging Support</h3>
+      <p class="fc-desc">Branding, labeling, and cartons can be matched to your launch plan for a cleaner final delivery.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="steps-section" id="about">
+  <div class="section-header">
+    <h2 class="section-title">How We Work Together</h2>
+    <p class="section-subtitle">A straightforward process from first inquiry to final delivery.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-item">
+      <div class="step-num red-bg">1</div>
+      <h4 class="step-title">Inquiry</h4>
+      <p class="step-desc">Share your target style, material, quantity, and timeline so we can review the project quickly.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num blue-bg">2</div>
+      <h4 class="step-title">Design Review</h4>
+      <p class="step-desc">We align on references, finishes, branding, and practical production details before sampling starts.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num yellow-bg"><span>3</span></div>
+      <h4 class="step-title">Sampling</h4>
+      <p class="step-desc">Sample development helps you confirm shape, fit, and finish before moving into full production.</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num red-bg">4</div>
+      <h4 class="step-title">Production & Delivery</h4>
+      <p class="step-desc">Once approved, we manage production, quality inspection, and international shipping to your destination.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY CHOOSE US (Red) ===== -->
+<section class="benefits-section">
+  <div class="section-header">
+    <h2 class="section-title" style="color:#fff;">Why Teams Stay With Carpe Diem</h2>
+    <p class="section-subtitle" style="color:rgba(255,255,255,0.8);">Consistency matters when you are planning repeat orders and launch calendars.</p>
+  </div>
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <h4 class="benefit-title">Fast Sampling</h4>
+      <p class="benefit-desc">Move from first inquiry to reviewable samples without unnecessary back-and-forth.</p>
+    </div>
+    <div class="benefit-card">
+      <h4 class="benefit-title">Clear Communication</h4>
+      <p class="benefit-desc">Keep every step understandable, from material selection through production and logistics.</p>
+    </div>
+    <div class="benefit-card">
+      <h4 class="benefit-title">Reliable Fulfillment</h4>
+      <p class="benefit-desc">Predictable lead times, quality checks, and shipping support make launch planning simpler.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials-section">
+  <div class="section-header">
+    <h2 class="section-title">What Buyers Ask First</h2>
+    <p class="section-subtitle">The same three priorities tend to drive almost every eyewear sourcing conversation.</p>
+  </div>
+  <div class="t-grid">
+    <div class="t-card">
+      <p class="t-quote">Fast sampling, clear updates, and practical guidance make sourcing much easier.</p>
+      <div class="t-author">Sampling</div>
+      <div class="t-role">Buyer Priority</div>
+    </div>
+    <div class="t-card">
+      <p class="t-quote">Lead times stay predictable when quality control is built into the process.</p>
+      <div class="t-author">Quality</div>
+      <div class="t-role">Buyer Priority</div>
+    </div>
+    <div class="t-card">
+      <p class="t-quote">International shipping should be simple, documented, and dependable.</p>
+      <div class="t-author">Logistics</div>
+      <div class="t-role">Buyer Priority</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING (Yellow) ===== -->
+<section class="pricing-section" id="pricing">
+  <div class="section-header">
+    <h2 class="section-title">Production Tiers</h2>
+    <p class="section-subtitle">Use these as planning ranges, then confirm the final path with your project requirements.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <h3 class="price-name">Small Runs</h3>
+      <div class="price-amount">From 300</div>
+      <ul class="price-feature-list">
+        <li>Acetate frame projects</li>
+        <li>Sampling support</li>
+        <li>Brand packaging</li>
+        <li>MOQ guidance by style</li>
+      </ul>
+      <a href="#contact" class="btn btn-outline" style="width:100%;">Request Quote</a>
+    </div>
+    <div class="price-card featured">
+      <h3 class="price-name">Core Production</h3>
+      <div class="price-amount">From 500</div>
+      <ul class="price-feature-list">
+        <li>Metal frame projects</li>
+        <li>Priority sampling</li>
+        <li>Quality checkpoints</li>
+        <li>Logistics support</li>
+        <li>Lead-time planning</li>
+      </ul>
+      <a href="#contact" class="btn btn-primary" style="width:100%;">Request Quote</a>
+    </div>
+    <div class="price-card">
+      <h3 class="price-name">Full Custom</h3>
+      <div class="price-amount">Custom</div>
+      <ul class="price-feature-list">
+        <li>OEM / ODM development</li>
+        <li>Mixed material projects</li>
+        <li>Dedicated communication</li>
+        <li>DDP shipping options</li>
+        <li>Long-term supply support</li>
+      </ul>
+      <a href="#contact" class="btn btn-outline" style="width:100%;">Talk to Sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ACCORDION ===== -->
+<section class="faq-section" id="faq">
+  <div class="section-header">
+    <h2 class="section-title">Common Questions</h2>
+  </div>
+  <div class="faq-container">
+    <div class="faq-item active">
+      <button class="faq-question open" onclick="toggleFaq(this)">
+        What is Carpe Diem Optical?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Carpe Diem Optical is a B2B eyewear manufacturing partner for brands that need dependable sampling, production, packaging, and global delivery support.
+        </div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How does the OEM process work?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Our OEM process follows a structured workflow: design consultation, prototype development, sample approval, production, quality inspection, and shipping.
+        </div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        What is the minimum order quantity?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          MOQ depends on frame style and material. Standard acetate projects typically start at 300 pieces per style, while metal frames usually begin at 500 pieces per style. Fully custom projects may require a different minimum.
+        </div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Do you offer international shipping?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Yes. We ship to more than 60 countries and can support DDP options for major markets across North America, Europe, and Southeast Asia.
+        </div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How long does production take?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Standard production usually takes 25 to 35 days after sample approval. Rush projects can be shortened to 15 to 20 days when capacity allows, and shipping time depends on the destination and delivery method.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA (Yellow with big shapes) ===== -->
+<section class="cta-section">
+  <div class="cta-deco-circle"></div>
+  <div class="cta-deco-square"></div>
+  <div class="cta-content">
+    <h2 class="cta-title">Start Your Next<br>Eyewear Collection</h2>
+    <div style="display:flex;gap:var(--space-md);justify-content:center;">
+      <a href="#contact" class="btn btn-primary">REQUEST A QUOTE</a>
+      <a href="#contact" class="btn btn-outline" style="background:var(--bau-white);">TALK TO SALES</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact-section" id="contact">
+  <div class="contact-shell">
+    <div class="contact-panel">
+      <span class="contact-kicker">Contact Sales</span>
+      <h2 class="contact-title">Tell Us What You Need And We Will Help You Scope The Right Next Step.</h2>
+      <p class="contact-copy">The fastest way to start is to share your frame type, target quantity, preferred materials, destination market, and timing. We use that information to recommend the right MOQ, sampling path, and production plan.</p>
+      <div class="contact-points">
+        <div class="contact-point">
+          <h4>Best For</h4>
+          <p>Buyers comparing factories, launching a new collection, or planning repeat production with a more reliable partner.</p>
+        </div>
+        <div class="contact-point">
+          <h4>Helpful To Include</h4>
+          <p>Reference images, material preferences, target order quantity, logo requirements, packaging needs, and delivery destination.</p>
+        </div>
+        <div class="contact-point">
+          <h4>What Happens Next</h4>
+          <p>We review your request, confirm feasibility, and come back with the clearest route into sampling, pricing, and production timing.</p>
+        </div>
+      </div>
+    </div>
+    <aside class="contact-card">
+      <h3 class="contact-card-title">Direct Contact</h3>
+      <div class="contact-list">
+        <div class="contact-list-item">
+          <span class="contact-label">Email</span>
+          <div class="contact-value"><a href="mailto:info@carpediemoptical.com">info@carpediemoptical.com</a></div>
+        </div>
+        <div class="contact-list-item">
+          <span class="contact-label">Inquiry Focus</span>
+          <div class="contact-value">OEM / ODM Projects</div>
+        </div>
+        <div class="contact-list-item">
+          <span class="contact-label">Response Window</span>
+          <div class="contact-value">Within 1 Business Day</div>
+        </div>
+      </div>
+      <p class="contact-note">If you already have tech packs, sketches, sample photos, or packaging references ready, include them in your first email so we can give you a more useful reply right away.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#top" class="logo-group">
+        <div class="geo-logo">
+          <div class="geo-circle"></div>
+          <div class="geo-square"></div>
+          <div class="geo-triangle"></div>
+        </div>
+        <span class="logo-text">CARPE DIEM OPTICAL</span>
+      </a>
+      <p>Built for eyewear brands that need clear communication, dependable production, and confident delivery.</p>
+      <p><a href="mailto:info@carpediemoptical.com">info@carpediemoptical.com</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#products">Optical Frames</a></li>
+        <li><a href="#products">Sunglasses</a></li>
+        <li><a href="#products">Reading Styles</a></li>
+        <li><a href="#solutions">Packaging Support</a></li>
+        <li><a href="#solutions">OEM / ODM Service</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Carpe Diem</a></li>
+        <li><a href="#about">How We Work</a></li>
+        <li><a href="#pricing">Pricing & MOQ</a></li>
+        <li><a href="#faq">Common Questions</a></li>
+        <li><a href="#contact">Contact Sales</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#products">Catalog Overview</a></li>
+        <li><a href="#about">Sampling Process</a></li>
+        <li><a href="#pricing">MOQ Guide</a></li>
+        <li><a href="#faq">Shipping Questions</a></li>
+        <li><a href="#contact">Project Support</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Carpe Diem Optical. All rights reserved.</span>
+    <div class="footer-signature">
+      <div class="fs-dot r"></div>
+      <div class="fs-dot b"></div>
+      <div class="fs-dot y"></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// FAQ Accordion Toggle
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isActive = item.classList.contains('active');
+  
+  // Close all
+  document.querySelectorAll('.faq-item').forEach(i => {
+    i.classList.remove('active');
+    i.querySelector('.faq-question').classList.remove('open');
+  });
+  
+  // Open clicked if it wasn't already open
+  if (!isActive) {
+    item.classList.add('active');
+    btn.classList.add('open');
+  }
+}
+</script>
+
+</body>
+</html>
+
+
+
+
