@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="CarpeDiem Optical designs and manufactures premium eyewear for global brands, with OEM and ODM support, sampling, and international delivery.">
-<title>CarpeDiem Optical | Premium Eyewear Manufacturing</title>
+<meta name="description" content="Carpe Diem Optical designs and manufactures premium eyewear for global brands, with OEM and ODM support, sampling, and international delivery.">
+<title>Carpe Diem Optical | Premium Eyewear Manufacturing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -617,6 +617,181 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================
+   IN-VIEW MOTION
+   ============================================ */
+.motion-ready .reveal-card {
+  opacity: 0;
+  transform: translateY(8px) scale(0.992);
+  transition:
+    opacity 0.22s ease-out,
+    transform 0.22s ease-out,
+    box-shadow 0.18s ease-out,
+    border-color 0.18s ease-out;
+  will-change: transform, opacity;
+}
+
+.motion-ready .reveal-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.motion-ready .reveal-card.is-visible:hover {
+  transform: translate(-4px, -4px) scale(1);
+}
+
+/* ============================================
+   SHARED CARD MOTION
+   ============================================ */
+.feature-card,
+.blog-card,
+.sponsor-card,
+.benefit-card,
+.t-card,
+.price-card,
+.step-item,
+.contact-panel,
+.contact-card {
+  position: relative;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.feature-card:hover,
+.blog-card:hover,
+.sponsor-card:hover,
+.benefit-card:hover,
+.t-card:hover,
+.price-card:hover,
+.step-item:hover,
+.contact-panel:hover,
+.contact-card:hover {
+  transform: translate(-4px, -4px);
+}
+
+.feature-card,
+.blog-card,
+.sponsor-card,
+.benefit-card,
+.t-card,
+.price-card,
+.step-item,
+.contact-panel,
+.contact-card {
+  box-shadow: 10px 10px 0 var(--bau-black);
+}
+
+.feature-card:hover,
+.blog-card:hover,
+.sponsor-card:hover,
+.benefit-card:hover,
+.t-card:hover,
+.price-card:hover,
+.step-item:hover,
+.contact-panel:hover,
+.contact-card:hover {
+  box-shadow: 14px 14px 0 var(--bau-black);
+}
+
+.price-card.featured:hover {
+  box-shadow: 14px 14px 0 var(--bau-black);
+}
+
+/* ============================================
+   SECTION LAYERED BOARDS
+   ============================================ */
+.testimonials-section {
+  position: relative;
+  overflow: hidden;
+}
+.testimonials-section::before {
+  content: '';
+  position: absolute;
+  right: -90px;
+  top: 52px;
+  width: 280px;
+  height: 280px;
+  border: 4px solid rgba(16, 64, 192, 0.12);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+.testimonials-section::after {
+  content: '';
+  position: absolute;
+  left: -48px;
+  bottom: 36px;
+  width: 180px;
+  height: 180px;
+  border: 4px solid rgba(214, 32, 32, 0.08);
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+.t-grid .t-card:nth-child(2) {
+  margin-top: 18px;
+}
+.t-grid .t-card:nth-child(3) {
+  margin-top: 36px;
+}
+
+.pricing-section {
+  position: relative;
+  overflow: hidden;
+}
+.pricing-section::before {
+  content: '';
+  position: absolute;
+  right: -80px;
+  top: 32px;
+  width: 220px;
+  height: 220px;
+  border: 4px solid rgba(214, 32, 32, 0.12);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+.pricing-section::after {
+  content: '';
+  position: absolute;
+  left: -60px;
+  bottom: 48px;
+  width: 160px;
+  height: 160px;
+  border: 4px solid rgba(16, 64, 192, 0.1);
+  pointer-events: none;
+}
+.pricing-grid .price-card:nth-child(1) {
+  margin-top: 8px;
+}
+.pricing-grid .price-card:nth-child(2) {
+  margin-top: -10px;
+}
+.pricing-grid .price-card:nth-child(3) {
+  margin-top: 22px;
+}
+.pricing-grid .price-card {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98) 0 72%, rgba(240,192,32,0.08) 100%);
+}
+.pricing-grid .price-card.featured {
+  background:
+    linear-gradient(180deg, rgba(214,32,32,0.98) 0 68%, rgba(16,64,192,0.08) 100%);
+}
+.pricing-grid .price-card,
+.t-grid .t-card {
+  overflow: hidden;
+}
+.price-card::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bau-red);
+}
+.price-card.featured::before {
+  background: var(--bau-yellow);
+}
+
+/* ============================================
    BLOG SECTION 閳?Blue bg, 3 cards
    ============================================ */
 .blog-section {
@@ -639,10 +814,8 @@ ul, ol { list-style: none; }
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s, box-shadow 0.2s;
 }
 .blog-card:hover {
-  transform: translate(-4px, -4px);
   box-shadow: 12px 12px 0 var(--bau-black);
 }
 
@@ -735,14 +908,11 @@ ul, ol { list-style: none; }
   border: var(--border-thick);
   box-shadow: var(--shadow-lg);
   padding: var(--space-xl);
-  position: relative;
-  transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
   min-height: 260px;
 }
 .feature-card:hover {
-  transform: translate(-4px, -4px);
   box-shadow: 12px 12px 0 var(--bau-black);
 }
 
@@ -851,7 +1021,6 @@ ul, ol { list-style: none; }
   border: var(--border-thick);
   box-shadow: var(--shadow-lg);
   padding: var(--space-xl);
-  position: relative;
 }
 .benefit-card::before {
   content: '';
@@ -893,7 +1062,6 @@ ul, ol { list-style: none; }
   border: var(--border-thick);
   box-shadow: var(--shadow-md);
   padding: var(--space-xl);
-  position: relative;
 }
 .t-card::before {
   content: '';
@@ -949,7 +1117,7 @@ ul, ol { list-style: none; }
 .price-card.featured {
   background: var(--bau-red);
   color: var(--bau-white);
-  transform: translateY(-16px);
+  margin-top: -16px;
   box-shadow: 10px 10px 0 var(--bau-black);
 }
 .price-name {
@@ -1573,7 +1741,7 @@ ul, ol { list-style: none; }
         <div class="geo-square"></div>
         <div class="geo-triangle"></div>
       </div>
-      <span class="logo-text">CARPEDIEM OPTICAL</span>
+      <span class="logo-text">CARPE DIEM OPTICAL</span>
     </a>
     <nav class="nav-links">
       <a href="#products">Products</a>
@@ -1605,7 +1773,7 @@ ul, ol { list-style: none; }
 <div class="uni-grid">
   <!-- TL: White 閳?buttons + avatars ONLY (title lives in hero) -->
   <div class="ug-cell ug-tl">
-    <p class="ug-body-text">CarpeDiem Optical helps brands source premium eyewear with OEM and ODM support, practical production planning, and dependable international delivery.</p>
+    <p class="ug-body-text">Carpe Diem Optical helps brands source premium eyewear with OEM and ODM support, practical production planning, and dependable international delivery.</p>
     <div class="hg-buttons">
       <a href="#contact" class="btn btn-primary btn-small">REQUEST A QUOTE</a>
       <a href="#solutions" class="btn btn-outline btn-small">VIEW CAPABILITIES</a>
@@ -1635,7 +1803,7 @@ ul, ol { list-style: none; }
 
   <!-- BR: White 閳?heading + body paragraphs + three color dots -->
   <div class="ug-cell ug-br">
-    <h3 class="ug-br-heading">From first concept to final cartons, CarpeDiem supports each stage of eyewear production.</h3>
+    <h3 class="ug-br-heading">From first concept to final cartons, Carpe Diem supports each stage of eyewear production.</h3>
     <div class="ug-br-body">
       <p>We guide brands from early ideas into approved samples, then into production with clear communication, practical guidance, and reliable timelines.</p>
       <p>Our process is built for wholesale eyewear, including custom development, quality inspection, packaging support, and shipping to more than 60 countries.</p>
@@ -1737,7 +1905,7 @@ ul, ol { list-style: none; }
         <img class="blog-img-inner" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjQ1MCIgZmlsbD0iI2Y2ZjZmMiIvPgogIDxjaXJjbGUgY3g9IjEyMCIgY3k9Ijk4IiByPSIzNCIgZmlsbD0iI2QwMjAyMCIvPgogIDxyZWN0IHg9IjE5MCIgeT0iNzIiIHdpZHRoPSIxMTAiIGhlaWdodD0iNTYiIHJ4PSIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTIxMjEyIiBzdHJva2Utd2lkdGg9IjEyIi8+CiAgPHJlY3QgeD0iMzE4IiB5PSI3MiIgd2lkdGg9IjExMCIgaGVpZ2h0PSI1NiIgcng9IjI4IiBmaWxsPSJub25lIiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iMTIiLz4KICA8cGF0aCBkPSJNMzAwIDEwMEgzMTgiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTE5MCA5MEgxMjgiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQyOCA5MEg0ODgiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHJlY3QgeD0iNDYwIiB5PSIxODAiIHdpZHRoPSIyMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjMTA0MEMwIiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iMTIiLz4KICA8Y2lyY2xlIGN4PSI1NDAiIGN5PSIyNDAiIHI9IjI4IiBmaWxsPSIjZjBjMDIwIi8+CiAgPHJlY3QgeD0iODAiIHk9IjIyMCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmY5YzQiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxMiIvPgogIDxwb2x5Z29uIHBvaW50cz0iMTcwLDI0NCAxNDUsMjg4IDE5NSwyODgiIGZpbGw9IiMxMjEyMTIiLz4KPC9zdmc+" alt="Eyewear frame illustration">
       </div>
       <div class="blog-body">
-        <div class="blog-meta"><span class="date">2025-01-15</span> · <span class="author">CarpeDiem Team</span></div>
+        <div class="blog-meta"><span class="date">2025-01-15</span> · <span class="author">Carpe Diem Team</span></div>
         <h3 class="blog-card-title">Choosing the Right Frame Materials</h3>
         <a href="#contact" class="btn-link blog-link">Request Sample →</a>
       </div>
@@ -1856,7 +2024,7 @@ ul, ol { list-style: none; }
 <!-- ===== WHY CHOOSE US (Red) ===== -->
 <section class="benefits-section">
   <div class="section-header">
-    <h2 class="section-title" style="color:#fff;">Why Teams Stay With CarpeDiem</h2>
+    <h2 class="section-title" style="color:#fff;">Why Teams Stay With Carpe Diem</h2>
     <p class="section-subtitle" style="color:rgba(255,255,255,0.8);">Consistency matters when you are planning repeat orders and launch calendars.</p>
   </div>
   <div class="benefits-grid">
@@ -1953,12 +2121,12 @@ ul, ol { list-style: none; }
   <div class="faq-container">
     <div class="faq-item active">
       <button class="faq-question open" onclick="toggleFaq(this)">
-        What is CarpeDiem Optical?
+        What is Carpe Diem Optical?
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-answer">
         <div class="faq-answer-inner">
-          CarpeDiem Optical is a B2B eyewear manufacturing partner for brands that need dependable sampling, production, packaging, and global delivery support.
+          Carpe Diem Optical is a B2B eyewear manufacturing partner for brands that need dependable sampling, production, packaging, and global delivery support.
         </div>
       </div>
     </div>
@@ -2049,7 +2217,7 @@ ul, ol { list-style: none; }
       <div class="contact-list">
         <div class="contact-list-item">
           <span class="contact-label">Email</span>
-          <div class="contact-value"><a href="mailto:isabel1215@carpediemoptic.com">info@carpediemoptical.com</a></div>
+          <div class="contact-value"><a href="mailto:info@carpediemoptic.com">info@carpediemoptic.com</a></div>
         </div>
         <div class="contact-list-item">
           <span class="contact-label">Inquiry Focus</span>
@@ -2075,10 +2243,10 @@ ul, ol { list-style: none; }
           <div class="geo-square"></div>
           <div class="geo-triangle"></div>
         </div>
-        <span class="logo-text">CARPEDIEM OPTICAL</span>
+        <span class="logo-text">CARPE DIEM OPTICAL</span>
       </a>
       <p>Built for eyewear brands that need clear communication, dependable production, and confident delivery.</p>
-      <p><a href="mailto:isabel1215@carpediemoptic.com">info@carpediemoptical.com</a></p>
+      <p><a href="mailto:info@carpediemoptic.com">info@carpediemoptic.com</a></p>
     </div>
     <div class="footer-col">
       <h4>Product</h4>
@@ -2093,7 +2261,7 @@ ul, ol { list-style: none; }
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
-        <li><a href="#about">About CarpeDiem</a></li>
+        <li><a href="#about">About Carpe Diem</a></li>
         <li><a href="#about">How We Work</a></li>
         <li><a href="#pricing">Pricing & MOQ</a></li>
         <li><a href="#faq">Common Questions</a></li>
@@ -2112,7 +2280,7 @@ ul, ol { list-style: none; }
     </div>
   </div>
   <div class="footer-bottom">
-    <span>&copy; 2026 CarpeDiem Optical. All rights reserved.</span>
+    <span>&copy; 2026 Carpe Diem Optical. All rights reserved.</span>
     <div class="footer-signature">
       <div class="fs-dot r"></div>
       <div class="fs-dot b"></div>
@@ -2138,6 +2306,31 @@ function toggleFaq(btn) {
     item.classList.add('active');
     btn.classList.add('open');
   }
+}
+
+document.documentElement.classList.add('motion-ready');
+const revealTargets = document.querySelectorAll(
+  '.feature-card, .blog-card, .sponsor-card, .benefit-card, .t-card, .price-card, .step-item, .contact-panel, .contact-card'
+);
+
+revealTargets.forEach((el, index) => {
+  el.classList.add('reveal-card');
+  el.style.transitionDelay = `${Math.min(index * 14, 84)}ms`;
+});
+
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -2% 0px' });
+
+  revealTargets.forEach((el) => revealObserver.observe(el));
+} else {
+  revealTargets.forEach((el) => el.classList.add('is-visible'));
 }
 </script>
 
