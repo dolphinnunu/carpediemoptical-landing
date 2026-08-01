@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Custom eyewear development illustration">
+  <rect width="800" height="500" fill="#ebe5df"/><g stroke="#315f60" stroke-opacity=".18" stroke-width="1"><path d="M0 50h800M0 100h800M0 150h800M0 200h800M0 250h800M0 300h800M0 350h800M0 400h800M50 0v500M100 0v500M150 0v500M200 0v500M250 0v500M300 0v500M350 0v500M400 0v500M450 0v500M500 0v500M550 0v500M600 0v500M650 0v500M700 0v500M750 0v500"/></g>
+  <g fill="none" stroke="#173b3e" stroke-width="7"><rect x="112" y="155" width="222" height="140" rx="63"/><rect x="466" y="155" width="222" height="140" rx="63"/><path d="M334 225h132"/><path d="M112 195H58M688 195h54" stroke-width="5" stroke-dasharray="8 8"/></g>
+  <g transform="translate(113 83)"><rect width="55" height="55" fill="#dc6a3b"/><rect x="65" width="55" height="55" fill="#bc7f22"/><rect x="130" width="55" height="55" fill="#5caeb0"/><rect x="195" width="55" height="55" fill="#173b3e"/></g>
+  <rect x="486" y="344" width="227" height="77" fill="#fffdfa" stroke="#bc7f22" stroke-width="2"/><text x="509" y="376" fill="#173b3e" font-family="Arial, sans-serif" font-size="16" letter-spacing="3">CUSTOM</text><text x="509" y="403" fill="#dc6a3b" font-family="Arial, sans-serif" font-size="16" letter-spacing="3">DEVELOPMENT</text>
+</svg>
