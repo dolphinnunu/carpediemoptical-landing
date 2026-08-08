@@ -33,12 +33,13 @@
     const emptyMessages = {
       metal: 'Our metal optical development is quoted by project. Share a reference or specification and we will send the suitable route.',
       sun: 'Our sun collection is developed by project. Tell us your preferred shape, lens direction and target quantity.',
-      custom: 'Custom programs are scoped from your brief. Share materials, branding details, target market and timeline.'
+      custom: 'Custom programs are scoped from your brief. Share materials, branding details, target market and timeline.',
+      accessories: 'Our components and packaging program can include lenses, hinge pins, temple inserts, cases and cleaning accessories. Share your requirements for a tailored quote.'
     };
 
     allModelsFilter.textContent = 'All categories';
     acetateFilter.textContent = 'Acetate Optical';
-    [['metal', 'Metal Optical'], ['sun', 'Sun Collection'], ['custom', 'Custom Programs']].forEach(([filter, label]) => {
+    [['metal', 'Metal Optical'], ['sun', 'Sun Collection'], ['custom', 'Custom Programs'], ['accessories', 'Accessories & Packaging']].forEach(([filter, label]) => {
       const button = document.createElement('button');
       button.className = 'filter';
       button.type = 'button';
