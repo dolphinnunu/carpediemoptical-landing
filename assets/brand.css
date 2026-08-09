@@ -1,0 +1,22 @@
+.nav .brand {
+  width: 138px;
+  height: 72px;
+  flex: 0 0 138px;
+  background: url('brand-logo.jpg') center / contain no-repeat;
+}
+
+.nav .brand > * {
+  display: none;
+}
+
+footer .brand .brand-sign {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .nav .brand {
+    width: 112px;
+    height: 58px;
+    flex-basis: 112px;
+  }
+}
