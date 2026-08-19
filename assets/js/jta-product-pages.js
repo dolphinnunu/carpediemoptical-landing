@@ -1,7 +1,8 @@
 (() => {
-  const match = location.pathname.match(/product-((?:yg|he)\d+)\.html$/i);
+  const match = location.pathname.match(/product-((?:yg|he|d)\d+)\.html$/i);
   if (!match) return;
 
+  const fiveMetalColorways = ['C1', 'C2', 'C3', 'C4', 'C5'].map((code) => ({ code, name: `${code} photographed sample` }));
   const products = {
     yg21285: { model: 'YG21285', size: ['53', '21', '145'] },
     yg21287: { model: 'YG21287', size: ['53', '17', '145'] },
@@ -11,6 +12,32 @@
     yg21291: { model: 'YG21291', size: ['54', '17', '145'] },
     yg78145: { model: 'YG78145', size: ['55', '16', '145'] },
     yg78146: { model: 'YG78146', size: ['55', '17', '145'] },
+    yg21286: {
+      model: 'YG21286',
+      size: ['54', '20', '145'],
+      main: 'front',
+      colorways: ['C1', 'C2', 'C3', 'C4'].map((code) => ({ code, name: `${code} photographed sample` })),
+      context: { file: 'lookbook-stack', label: 'Colourway overview', alt: 'YG21286 photographed colourway overview' }
+    },
+    yg21318: {
+      model: 'YG21318',
+      main: 'front',
+      colorways: ['C1', 'C2', 'C3', 'C4', 'C5'].map((code) => ({ code, name: `${code} photographed sample` })),
+      context: { file: 'lookbook-stack', label: 'Colourway overview', alt: 'YG21318 photographed colourway overview' }
+    },
+    yg21320: {
+      model: 'YG21320',
+      size: ['56', '19', '145'],
+      main: 'front',
+      colorways: ['C1', 'C2', 'C3', 'C4', 'C5'].map((code) => ({ code, name: `${code} photographed sample` })),
+      context: { file: 'lookbook-stack', label: 'Colourway overview', alt: 'YG21320 photographed colourway overview' }
+    },
+    yg78165: {
+      model: 'YG78165',
+      main: 'front',
+      colorways: ['C1', 'C2', 'C3', 'C4', 'C5', 'C6'].map((code) => ({ code, name: `${code} photographed sample` })),
+      context: { file: 'lookbook-stack', label: 'Colourway overview', alt: 'YG78165 photographed colourway overview' }
+    },
     he3111: { model: 'HE3111', size: ['56', '17', '145'], main: 'front', context: { file: 'lookbook-stack', label: 'Color board', alt: 'HE3111 photographed colorway board' } },
     he3112: { model: 'HE3112', size: ['57', '16', '145'], main: 'front', context: { file: 'lookbook-stack', label: 'Color board', alt: 'HE3112 photographed colorway board' } },
     he3113: {
@@ -45,13 +72,20 @@
       context: { file: 'lookbook-stack', label: 'Color board', alt: 'HE3119 photographed colorway board' }
     },
     he3120: { model: 'HE3120', size: ['54', '17', '145'], front: '134', height: '48', main: 'front', context: { file: 'lookbook-stack', label: 'Color board', alt: 'HE3120 photographed colorway board' } },
-    he3121: { model: 'HE3121', size: ['54', '18', '145'], front: '136', height: '49', main: 'front', context: { file: 'lookbook-stack', label: 'Color board', alt: 'HE3121 photographed colorway board' } }
+    he3121: { model: 'HE3121', size: ['54', '18', '145'], front: '136', height: '49', main: 'front', context: { file: 'lookbook-stack', label: 'Color board', alt: 'HE3121 photographed colorway board' } },
+    d3452: { model: 'D3452', size: ['51', '19', '142'], category: 'Metal Optical', material: 'Metal', colorways: fiveMetalColorways, main: 'front', context: { file: 'lookbook-stack', label: 'Colour board', alt: 'D3452 photographed colourway board' } },
+    d3721: { model: 'D3721', size: ['54', '16', '142'], category: 'Metal Optical', material: 'Metal', colorways: fiveMetalColorways, main: 'front', context: { file: 'lookbook-stack', label: 'Colour board', alt: 'D3721 photographed colourway board' } },
+    d3727: { model: 'D3727', size: ['54', '16', '142'], category: 'Metal Optical', material: 'Metal', colorways: fiveMetalColorways, main: 'front', context: { file: 'lookbook-stack', label: 'Colour board', alt: 'D3727 photographed colourway board' } },
+    d3741: { model: 'D3741', size: ['54', '17', '142'], category: 'Metal Optical', material: 'Metal', colorways: fiveMetalColorways, main: 'front', context: { file: 'on-model', label: 'Fit reference', alt: 'D3741 metal optical frame worn by a model' } },
+    d3743: { model: 'D3743', size: ['54', '16', '142'], category: 'Metal Optical', material: 'Metal', colorways: fiveMetalColorways, main: 'front', context: { file: 'lookbook-stack', label: 'Colour board', alt: 'D3743 photographed colourway board' } },
+    d3776: { model: 'D3776', size: ['55', '17', '144'], category: 'Metal Optical', material: 'Metal', colorways: fiveMetalColorways, main: 'front', context: { file: 'on-model', label: 'Fit reference', alt: 'D3776 metal optical frame worn by a model' } }
   };
   const slug = match[1].toLowerCase();
   const product = products[slug];
   if (!product) return;
 
-  const [lens, bridge, temple] = product.size;
+  const hasVerifiedSize = Array.isArray(product.size) && product.size.length === 3;
+  const [lens, bridge, temple] = product.size || [];
   const asset = (file) => `assets/products/${slug}/${slug}-${file}.jpg`;
   const c1 = asset('c1');
   const stage = document.querySelector('.main-image');
@@ -64,22 +98,29 @@
   const context = product.context || { file: 'on-model', label: 'On model', alt: `${product.model} worn by a model` };
   const mainView = product.main ? { file: product.main, label: product.mainLabel || 'Front view' } : null;
   const lensElement = document.querySelector('.zoom-lens');
+  const isMetal = product.category === 'Metal Optical';
+  const categoryName = isMetal ? 'Metal Optical' : 'Acetate Optical';
+  const productType = isMetal ? 'Metal optical frame sample' : 'Acetate optical frame sample';
+  const materialName = product.material || 'Acetate';
+  const descriptor = isMetal ? 'metal optical frame' : 'acetate optical frame';
 
-  document.title = `${product.model} Acetate Optical Frame | CarpeDiem Optic`;
-  document.querySelector('meta[name="description"]')?.setAttribute('content', `${product.model} acetate optical frame by CarpeDiem Optic. Explore four sample colorways, construction details and OEM or private label inquiry options.`);
+  document.title = `${product.model} ${categoryName} Frame | CarpeDiem Optic`;
+  document.querySelector('meta[name="description"]')?.setAttribute('content', `${product.model} ${descriptor} by CarpeDiem Optic. Explore ${colorways.length} photographed colourways, construction details and OEM or private label inquiry options.`);
   document.querySelectorAll('.brand-name').forEach((element) => { element.textContent = 'CarpeDiem Optic'; });
   document.querySelectorAll('footer').forEach((element) => { element.innerHTML = element.innerHTML.replaceAll('Carpe Diem Optic', 'CarpeDiem Optic'); });
   document.head.insertAdjacentHTML('beforeend', `<style>.main-image:before{content:'${product.model}'}.main-image:after{content:'C1 / VIEW'}.main-image img{transform:none!important}</style>`);
-  document.querySelector('.crumbs .wrap').innerHTML = `<a href="index.html">Home</a><span>/</span><a href="products.html">Optical Frames</a><span>/</span>${product.model}`;
-  document.querySelector('.product-info .eyebrow').textContent = 'Acetate optical frame / sample catalog';
+  document.querySelector('.crumbs .wrap').innerHTML = `<a href="index.html">Home</a><span>/</span><a href="products.html?category=${isMetal ? 'metal' : 'optical'}">${categoryName}</a><span>/</span>${product.model}`;
+  document.querySelector('.product-info .eyebrow').textContent = `${categoryName} frame / sample catalog`;
   document.querySelector('.product-info h1').textContent = product.model;
   document.querySelector('.model-code').firstChild.textContent = `${product.model} / C1`;
-  document.querySelector('.intro').textContent = 'An acetate optical frame sample with a defined profile, layered material character and a considered temple construction. Review the photographed colorways as a starting point for OEM, ODM or private label development.';
+  document.querySelector('.intro').textContent = isMetal
+    ? `A metal optical frame sample with a defined profile, refined rim construction and ${colorways.length} photographed colour directions. Review the frame, temples and construction details as a starting point for OEM, ODM or private label development.`
+    : 'An acetate optical frame sample with a defined profile, layered material character and a considered temple construction. Review the photographed colorways as a starting point for OEM, ODM or private label development.';
   document.querySelector('.status').textContent = 'Available for project discussion';
-  document.querySelector('.buyer-summary').innerHTML = '<div class="buyer-summary-item"><strong>Acetate</strong><span>Frame material</span></div><div class="buyer-summary-item"><strong>4</strong><span>Colorways shown</span></div><div class="buyer-summary-item"><strong>OEM</strong><span>Project support</span></div>';
+  document.querySelector('.buyer-summary').innerHTML = `<div class="buyer-summary-item"><strong>${materialName}</strong><span>Frame material</span></div><div class="buyer-summary-item"><strong>${colorways.length}</strong><span>Colourways shown</span></div><div class="buyer-summary-item"><strong>OEM</strong><span>Project support</span></div>`;
   document.querySelector('.contact-note').innerHTML = '<span>+</span><span><b>Need a variation?</b> Ask about colour direction, logo, packaging, quantities or a related optical frame route.</span>';
 
-  thumbs.innerHTML = (mainView ? `<button class="thumb active" type="button" data-image="${asset(mainView.file)}" data-color="${mainView.label}" data-label="${mainView.label}"><img src="${asset(mainView.file)}" alt="${product.model} front view acetate optical frame"></button>` : '') + colorways.map((color, index) => `<button class="thumb${!mainView && index === 0 ? ' active' : ''}" type="button" data-image="${asset(color.code.toLowerCase())}" data-color="${color.code}" data-label="${color.name}"><img src="${asset(color.code.toLowerCase())}" alt="${product.model} ${color.code} ${color.name} acetate optical frame"></button>`).join('') + `<button class="thumb" type="button" data-image="${asset('c1-detail')}" data-color="C1 detail" data-label="Construction detail"><img src="${asset('c1-detail')}" alt="${product.model} temple construction detail"></button><button class="thumb" type="button" data-image="${asset(context.file)}" data-color="${context.label}" data-label="${context.label}"><img src="${asset(context.file)}" alt="${context.alt}"></button>`;
+  thumbs.innerHTML = (mainView ? `<button class="thumb active" type="button" data-image="${asset(mainView.file)}" data-color="${mainView.label}" data-label="${mainView.label}"><img src="${asset(mainView.file)}" alt="${product.model} front view ${descriptor}"></button>` : '') + colorways.map((color, index) => `<button class="thumb${!mainView && index === 0 ? ' active' : ''}" type="button" data-image="${asset(color.code.toLowerCase())}" data-color="${color.code}" data-label="${color.name}"><img src="${asset(color.code.toLowerCase())}" alt="${product.model} ${color.code} ${color.name} ${descriptor}"></button>`).join('') + `<button class="thumb" type="button" data-image="${asset('c1-detail')}" data-color="C1 detail" data-label="Construction detail"><img src="${asset('c1-detail')}" alt="${product.model} temple construction detail"></button><button class="thumb" type="button" data-image="${asset(context.file)}" data-color="${context.label}" data-label="${context.label}"><img src="${asset(context.file)}" alt="${context.alt}"></button>`;
   colors.innerHTML = colorways.map((color, index) => `<button class="color${index === 0 ? ' active' : ''}" type="button" data-image="${asset(color.code.toLowerCase())}" data-color="${color.code}" data-label="${color.name}"><img src="${asset(color.code.toLowerCase())}" alt="Select ${product.model} ${color.code}"></button>`).join('');
   if (mainView) {
     document.querySelector('.field-label').firstChild.textContent = 'View ';
@@ -87,9 +128,9 @@
   }
 
   function selectImage(choice) {
-    const isModel = choice.dataset.color === 'On model';
+    const isModel = context.file === 'on-model' && choice.dataset.color === context.label;
     stageImage.src = choice.dataset.image;
-    stageImage.alt = `${product.model} ${choice.dataset.label || choice.dataset.color} acetate optical frame`;
+    stageImage.alt = `${product.model} ${choice.dataset.label || choice.dataset.color} ${descriptor}`;
     selected.textContent = choice.dataset.color;
     imageNote.textContent = isModel ? 'ON MODEL' : 'PRODUCT SAMPLE';
     stage.classList.toggle('model-view', isModel);
@@ -100,22 +141,31 @@
   document.querySelectorAll('.thumb,.color').forEach((choice) => choice.addEventListener('click', () => selectImage(choice)));
   selectImage(thumbs.querySelector('.thumb'));
 
-  document.querySelector('.technical .technical-intro').textContent = 'The information below identifies the photographed sample supplied for review. Final color, packaging, quantities and production terms are confirmed by project brief before ordering.';
+  document.querySelector('.technical .technical-intro').textContent = 'The information below identifies the photographed sample supplied for review. Final colour, packaging, quantities and production terms are confirmed by project brief before ordering.';
   const additionalMeasurements = product.front ? `<div class="spec"><span class="spec-key">Front width</span><span class="spec-value">${product.front} mm</span></div><div class="spec"><span class="spec-key">Frame height</span><span class="spec-value">${product.height} mm</span></div>` : '';
-  document.querySelector('.specs').innerHTML = `<div class="spec"><span class="spec-key">Model</span><span class="spec-value">${product.model}</span></div><div class="spec"><span class="spec-key">Product type</span><span class="spec-value">Acetate optical frame sample</span></div><div class="spec"><span class="spec-key">Material</span><span class="spec-value">Acetate</span></div><div class="spec"><span class="spec-key">Size shown</span><span class="spec-value">${lens} - ${bridge} - ${temple}</span></div>${additionalMeasurements}<div class="spec"><span class="spec-key">Colorways shown</span><span class="spec-value">${colorways.map((color) => color.code).join(', ')}</span></div><div class="spec"><span class="spec-key">Project options</span><span class="spec-value">OEM, ODM, private label, packaging support</span></div><p class="notice">Product specifications shown here are for preliminary B2B discussion and subject to final confirmation.</p>`;
+  const sizeSpecification = hasVerifiedSize
+    ? `<div class="spec"><span class="spec-key">Size shown</span><span class="spec-value">${lens} - ${bridge} - ${temple}</span></div>`
+    : '<div class="spec"><span class="spec-key">Dimensions</span><span class="spec-value">Confirmed by project brief</span></div>';
+  document.querySelector('.specs').innerHTML = `<div class="spec"><span class="spec-key">Model</span><span class="spec-value">${product.model}</span></div><div class="spec"><span class="spec-key">Product type</span><span class="spec-value">${productType}</span></div><div class="spec"><span class="spec-key">Material</span><span class="spec-value">${materialName}</span></div>${sizeSpecification}${additionalMeasurements}<div class="spec"><span class="spec-key">Colourways shown</span><span class="spec-value">${colorways.map((color) => color.code).join(', ')}</span></div><div class="spec"><span class="spec-key">Project options</span><span class="spec-value">OEM, ODM, private label, packaging support</span></div><p class="notice">Product specifications shown here are for preliminary B2B discussion and subject to final confirmation.</p>`;
 
   document.querySelector('.lookbook')?.remove();
   const frameContext = document.createElement('section');
   frameContext.className = 'lookbook';
   frameContext.setAttribute('aria-label', `${product.model} frame in context`);
-  frameContext.innerHTML = `<div class="wrap"><div class="lookbook-head"><div><span class="eyebrow">FRAME IN CONTEXT</span><h2>Material character and construction.</h2></div><p>Review the photographed sample as a complete frame system: the acetate front, temple construction, hinge detailing and available color directions.</p></div><div class="lookbook-grid"><figure class="lookbook-card lookbook-still"><img src="${asset('lookbook-still')}" alt="${product.model} acetate optical frame front view"><figcaption class="lookbook-label">C1 / front view</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset(context.file)}" alt="${context.alt}"><figcaption class="lookbook-label">${context.label}</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-temple')}" alt="${product.model} acetate temple detail"><figcaption class="lookbook-label">Temple detail</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-hinge')}" alt="${product.model} hinge construction detail"><figcaption class="lookbook-label">Hinge detail</figcaption></figure><div class="lookbook-spec"><div class="lookbook-spec-title">Sample dimensions<small>Photographed product specification</small></div><div class="lookbook-measure"><strong>${lens} mm</strong><span>Lens width</span></div><div class="lookbook-measure"><strong>${bridge} mm</strong><span>Bridge</span></div><div class="lookbook-measure"><strong>${temple} mm</strong><span>Temple</span></div></div></div></div>`;
+  const contextDescription = isMetal
+    ? 'Review the photographed sample as a complete metal frame system: front profile, rim construction, temple detailing and available colour directions.'
+    : 'Review the photographed sample as a complete frame system: the acetate front, temple construction, hinge detailing and available color directions.';
+  const contextMeasurements = hasVerifiedSize
+    ? `<div class="lookbook-spec-title">Sample dimensions<small>Photographed product specification</small></div><div class="lookbook-measure"><strong>${lens} mm</strong><span>Lens width</span></div><div class="lookbook-measure"><strong>${bridge} mm</strong><span>Bridge</span></div><div class="lookbook-measure"><strong>${temple} mm</strong><span>Temple</span></div>`
+    : '<div class="lookbook-spec-title">Product dimensions<small>Confirmed by project brief</small></div><div class="lookbook-measure"><strong>Pending</strong><span>Lens, bridge and temple</span></div>';
+  frameContext.innerHTML = `<div class="wrap"><div class="lookbook-head"><div><span class="eyebrow">FRAME IN CONTEXT</span><h2>Material character and construction.</h2></div><p>${contextDescription}</p></div><div class="lookbook-grid"><figure class="lookbook-card lookbook-still"><img src="${asset('lookbook-still')}" alt="${product.model} ${descriptor} front view"><figcaption class="lookbook-label">${mainView ? mainView.label : 'C1 / front view'}</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset(context.file)}" alt="${context.alt}"><figcaption class="lookbook-label">${context.label}</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-temple')}" alt="${product.model} temple detail"><figcaption class="lookbook-label">Temple detail</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-hinge')}" alt="${product.model} hinge construction detail"><figcaption class="lookbook-label">Hinge detail</figcaption></figure><div class="lookbook-spec">${contextMeasurements}</div></div></div>`;
   document.querySelector('.technical').after(frameContext);
 
   document.querySelector('.services-head .eyebrow').textContent = 'Project support';
   document.querySelector('.services h2').textContent = 'More than a product sample.';
   document.querySelector('.services-head p').textContent = 'Move from a selected optical frame direction into a clear sampling, branding and delivery conversation.';
   const serviceCopy = [
-    ['OEM / Private Label', 'Discuss colour direction, logo placement and product presentation around this acetate optical style.'],
+    ['OEM / Private Label', `Discuss colour direction, logo placement and product presentation around this ${isMetal ? 'metal' : 'acetate'} optical style.`],
     ['Sample Review', 'Confirm the material, fit direction and project requirements before production planning.'],
     ['Packaging & Delivery', 'Plan cases, labeling, cartons and international delivery requirements before an order is confirmed.']
   ];
