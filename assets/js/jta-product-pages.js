@@ -17,7 +17,12 @@
       size: ['54', '20', '145'],
       main: 'front',
       colorways: ['C1', 'C2', 'C3', 'C4'].map((code) => ({ code, name: `${code} photographed sample` })),
-      context: { file: 'lookbook-stack', label: 'Colourway overview', alt: 'YG21286 photographed colourway overview' }
+      context: {
+        file: 'on-model-accurate',
+        label: 'On-model fit',
+        alt: 'YG21286 champagne-blush acetate optical frame worn by a model',
+        isModel: true
+      }
     },
     yg21318: {
       model: 'YG21318',
@@ -84,9 +89,17 @@
   const product = products[slug];
   if (!product) return;
 
+  // Only verified, product-specific on-model images are allowed to enter this renderer.
+  const styleReferenceSlugs = new Set(['yg21285', 'yg21286', 'yg21287', 'yg21288', 'yg21289', 'yg21290', 'yg21291', 'yg78145', 'yg78146', 'yg21318', 'yg21320', 'yg78165', 'd3452', 'd3721', 'd3727', 'd3743', 'he3111', 'he3112', 'he3113', 'he3114', 'he3115', 'he3116', 'he3117', 'he3118', 'he3119', 'he3120', 'he3121']);
+  const hasStyleReference = styleReferenceSlugs.has(slug);
   const hasVerifiedSize = Array.isArray(product.size) && product.size.length === 3;
   const [lens, bridge, temple] = product.size || [];
-  const asset = (file) => `assets/products/${slug}/${slug}-${file}.jpg`;
+  const asset = (file) => {
+    if (styleReferenceSlugs.has(slug) && file === 'on-model') {
+      return `assets/products/${slug}/${slug}-on-model-accurate.png`;
+    }
+    return `assets/products/${slug}/${slug}-${file}.jpg`;
+  };
   const c1 = asset('c1');
   const stage = document.querySelector('.main-image');
   const stageImage = document.querySelector('#main-product-image');
@@ -95,7 +108,9 @@
   const selected = document.querySelector('#selected-color');
   const imageNote = document.querySelector('.image-note');
   const colorways = product.colorways || ['C1', 'C2', 'C3', 'C4'].map((code) => ({ code, name: `${code} photographed sample` }));
-  const context = product.context || { file: 'on-model', label: 'On model', alt: `${product.model} worn by a model` };
+  const context = hasStyleReference
+    ? { file: 'on-model', label: 'On-model fit', alt: `${product.model} ${product.category || 'acetate optical'} frame worn by a model`, isModel: true }
+    : product.context || { file: 'on-model', label: 'On model', alt: `${product.model} worn by a model` };
   const mainView = product.main ? { file: product.main, label: product.mainLabel || 'Front view' } : null;
   const lensElement = document.querySelector('.zoom-lens');
   const isMetal = product.category === 'Metal Optical';
@@ -108,7 +123,7 @@
   document.querySelector('meta[name="description"]')?.setAttribute('content', `${product.model} ${descriptor} by CarpeDiem Optic. Explore ${colorways.length} photographed colourways, construction details and OEM or private label inquiry options.`);
   document.querySelectorAll('.brand-name').forEach((element) => { element.textContent = 'CarpeDiem Optic'; });
   document.querySelectorAll('footer').forEach((element) => { element.innerHTML = element.innerHTML.replaceAll('Carpe Diem Optic', 'CarpeDiem Optic'); });
-  document.head.insertAdjacentHTML('beforeend', `<style>.main-image:before{content:'${product.model}'}.main-image:after{content:'C1 / VIEW'}.main-image img{transform:none!important}</style>`);
+  document.head.insertAdjacentHTML('beforeend', `<style>.main-image:before{content:'${product.model}'}.main-image:after{content:'C1 / VIEW'}.main-image img{transform:none!important}.main-image.model-view img{width:90%;height:90%;object-fit:cover}</style>`);
   document.querySelector('.crumbs .wrap').innerHTML = `<a href="index.html">Home</a><span>/</span><a href="products.html?category=${isMetal ? 'metal' : 'optical'}">${categoryName}</a><span>/</span>${product.model}`;
   document.querySelector('.product-info .eyebrow').textContent = `${categoryName} frame / sample catalog`;
   document.querySelector('.product-info h1').textContent = product.model;
@@ -128,11 +143,11 @@
   }
 
   function selectImage(choice) {
-    const isModel = context.file === 'on-model' && choice.dataset.color === context.label;
+    const isModel = (context.file === 'on-model' || context.isModel === true) && choice.dataset.color === context.label;
     stageImage.src = choice.dataset.image;
     stageImage.alt = `${product.model} ${choice.dataset.label || choice.dataset.color} ${descriptor}`;
     selected.textContent = choice.dataset.color;
-    imageNote.textContent = isModel ? 'ON MODEL' : 'PRODUCT SAMPLE';
+    imageNote.textContent = isModel ? 'ON-MODEL FIT' : 'PRODUCT SAMPLE';
     stage.classList.toggle('model-view', isModel);
     document.querySelectorAll('.thumb,.color').forEach((item) => item.classList.remove('active'));
     document.querySelectorAll(`[data-color="${choice.dataset.color}"]`).forEach((item) => item.classList.add('active'));
@@ -152,13 +167,21 @@
   const frameContext = document.createElement('section');
   frameContext.className = 'lookbook';
   frameContext.setAttribute('aria-label', `${product.model} frame in context`);
-  const contextDescription = isMetal
+  const contextDescription = hasStyleReference
+    ? 'A lifestyle styling reference accompanies the photographed product views. It communicates the collection mood only; review the white-background product images for this model’s exact shape, colour and construction.'
+    : isMetal
     ? 'Review the photographed sample as a complete metal frame system: front profile, rim construction, temple detailing and available colour directions.'
     : 'Review the photographed sample as a complete frame system: the acetate front, temple construction, hinge detailing and available color directions.';
   const contextMeasurements = hasVerifiedSize
     ? `<div class="lookbook-spec-title">Sample dimensions<small>Photographed product specification</small></div><div class="lookbook-measure"><strong>${lens} mm</strong><span>Lens width</span></div><div class="lookbook-measure"><strong>${bridge} mm</strong><span>Bridge</span></div><div class="lookbook-measure"><strong>${temple} mm</strong><span>Temple</span></div>`
     : '<div class="lookbook-spec-title">Product dimensions<small>Confirmed by project brief</small></div><div class="lookbook-measure"><strong>Pending</strong><span>Lens, bridge and temple</span></div>';
-  frameContext.innerHTML = `<div class="wrap"><div class="lookbook-head"><div><span class="eyebrow">FRAME IN CONTEXT</span><h2>Material character and construction.</h2></div><p>${contextDescription}</p></div><div class="lookbook-grid"><figure class="lookbook-card lookbook-still"><img src="${asset('lookbook-still')}" alt="${product.model} ${descriptor} front view"><figcaption class="lookbook-label">${mainView ? mainView.label : 'C1 / front view'}</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset(context.file)}" alt="${context.alt}"><figcaption class="lookbook-label">${context.label}</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-temple')}" alt="${product.model} temple detail"><figcaption class="lookbook-label">Temple detail</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-hinge')}" alt="${product.model} hinge construction detail"><figcaption class="lookbook-label">Hinge detail</figcaption></figure><div class="lookbook-spec">${contextMeasurements}</div></div></div>`;
+  const primaryContextCard = hasStyleReference
+    ? `<figure class="lookbook-card lookbook-still"><img src="${asset('on-model')}" alt="${context.alt}"><figcaption class="lookbook-label">On-model fit</figcaption></figure>`
+    : `<figure class="lookbook-card lookbook-still"><img src="${asset('lookbook-still')}" alt="${product.model} ${descriptor} front view"><figcaption class="lookbook-label">${mainView ? mainView.label : 'C1 / front view'}</figcaption></figure>`;
+  const secondaryContextCard = hasStyleReference
+    ? `<figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-still')}" alt="${product.model} ${descriptor} front view"><figcaption class="lookbook-label">${mainView ? mainView.label : 'C1 / front view'}</figcaption></figure>`
+    : `<figure class="lookbook-card lookbook-portrait"><img src="${asset(context.file)}" alt="${context.alt}"><figcaption class="lookbook-label">${context.label}</figcaption></figure>`;
+  frameContext.innerHTML = `<div class="wrap"><div class="lookbook-head"><div><span class="eyebrow">FRAME IN CONTEXT</span><h2>Material character and construction.</h2></div><p>${contextDescription}</p></div><div class="lookbook-grid">${primaryContextCard}${secondaryContextCard}<figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-temple')}" alt="${product.model} temple detail"><figcaption class="lookbook-label">Temple detail</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-hinge')}" alt="${product.model} hinge construction detail"><figcaption class="lookbook-label">Hinge detail</figcaption></figure><div class="lookbook-spec">${contextMeasurements}</div></div></div>`;
   document.querySelector('.technical').after(frameContext);
 
   document.querySelector('.services-head .eyebrow').textContent = 'Project support';

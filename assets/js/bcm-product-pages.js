@@ -16,8 +16,16 @@
   const product = products[slug];
   if (!product) return;
 
+  const styleReferenceSlugs = new Set(['bcm301', 'bcm302', 'bcm303', 'bcm304', 'bcm305', 'bcm306', 'bcm307', 'bcm308']);
+  const hasStyleReference = styleReferenceSlugs.has(slug);
+  const hasOnModel = product.hasOnModel || hasStyleReference;
   const [lens, bridge, temple] = product.size;
-  const asset = (file) => `assets/products/${slug}/${slug}-${file}.jpg`;
+  const asset = (file) => {
+    if (styleReferenceSlugs.has(slug) && file === 'on-model') {
+      return `assets/products/${slug}/${slug}-on-model-accurate.png`;
+    }
+    return `assets/products/${slug}/${slug}-${file}.jpg`;
+  };
   const stage = document.querySelector('.main-image');
   const stageImage = document.querySelector('#main-product-image');
   const thumbs = document.querySelector('.thumbs');
@@ -42,7 +50,7 @@
   document.querySelector('.contact-note').innerHTML = '<span>+</span><span><b>Need a variation?</b> Ask about colour direction, clip-on lens route, logo, packaging or quantities.</span>';
 
   const choice = (file, color, label, alt, active = false) => `<button class="thumb${active ? ' active' : ''}" type="button" data-image="${asset(file)}" data-color="${color}" data-label="${label}"><img src="${asset(file)}" alt="${alt}"></button>`;
-  thumbs.innerHTML = colorways.map((code, index) => choice(`c${index + 1}`, code, `${code} frame + magnetic sun clip`, `${product.model} ${code} optical frame with magnetic sun clip attached`, index === 0)).join('') + choice('c1-detail', 'Optical base', 'Optical base frame', `${product.model} C1 optical base frame`) + choice('c1-profile', 'Magnetic sun clip', 'Separate magnetic sun clip', `${product.model} C1 separate magnetic sun clip`) + (product.hasOnModel ? choice('on-model', 'On model', 'On-model fit reference', `${product.model} optical base frame on-model fit reference`) : '');
+  thumbs.innerHTML = colorways.map((code, index) => choice(`c${index + 1}`, code, `${code} frame + magnetic sun clip`, `${product.model} ${code} optical frame with magnetic sun clip attached`, index === 0)).join('') + choice('c1-detail', 'Optical base', 'Optical base frame', `${product.model} C1 optical base frame`) + choice('c1-profile', 'Magnetic sun clip', 'Separate magnetic sun clip', `${product.model} C1 separate magnetic sun clip`) + (hasOnModel ? choice('on-model', 'On model', hasStyleReference ? 'Lifestyle styling reference' : 'On-model fit reference', hasStyleReference ? 'Magnetic clip-on lifestyle styling reference' : `${product.model} optical base frame on-model fit reference`) : '');
   colors.innerHTML = colorways.map((code, index) => `<button class="color${index === 0 ? ' active' : ''}" type="button" data-image="${asset(`c${index + 1}`)}" data-color="${code}" data-label="${code} frame + magnetic sun clip"><img src="${asset(`c${index + 1}`)}" alt="Select ${product.model} ${code} with magnetic sun clip"></button>`).join('');
   document.querySelector('.field-label').firstChild.textContent = 'View ';
   stage.insertAdjacentHTML('beforeend', `<figure class="component-preview base-preview"><img src="${asset('c1-base')}" alt="${product.model} C1 optical base frame"><span>Optical base frame</span></figure><figure class="component-preview clip-preview"><img src="${asset('c1-clip')}" alt="${product.model} C1 removable magnetic sun clip"><span>Removable magnetic sun clip</span></figure>`);
@@ -53,7 +61,7 @@
     stageImage.src = item.dataset.image;
     stageImage.alt = `${product.model} ${item.dataset.label || item.dataset.color}`;
     selected.textContent = item.dataset.color;
-    imageNote.textContent = item.dataset.color === 'On model' ? 'ON-MODEL REFERENCE' : item.dataset.color === 'Optical base' || item.dataset.color === 'Magnetic sun clip' ? 'PRODUCT COMPONENT' : 'FRAME + SUN CLIP';
+    imageNote.textContent = item.dataset.color === 'On model' ? (hasStyleReference ? 'LIFESTYLE REFERENCE' : 'ON-MODEL REFERENCE') : item.dataset.color === 'Optical base' || item.dataset.color === 'Magnetic sun clip' ? 'PRODUCT COMPONENT' : 'FRAME + SUN CLIP';
     const colorIndex = item.dataset.color.match(/^C(\d)$/)?.[1] || '1';
     basePreviewImage.src = asset(`c${colorIndex}-base`);
     basePreviewImage.alt = `${product.model} C${colorIndex} optical base frame`;
@@ -72,13 +80,18 @@
   const frameContext = document.createElement('section');
   frameContext.className = 'lookbook';
   frameContext.setAttribute('aria-label', `${product.model} frame details`);
+  const primaryContextCard = hasStyleReference
+    ? `<figure class="lookbook-card lookbook-still"><img src="${asset('on-model')}" alt="Magnetic clip-on lifestyle styling reference"><figcaption class="lookbook-label">Lifestyle styling reference</figcaption></figure>`
+    : `<figure class="lookbook-card lookbook-still"><img src="${asset('c1-detail')}" alt="${product.model} C1 optical base frame"><figcaption class="lookbook-label">C1 / optical base</figcaption></figure>`;
   const fourthContextCard = product.hasOnModel
     ? `<figure class="lookbook-card lookbook-portrait"><img src="${asset('on-model')}" alt="${product.model} optical base frame on-model fit reference"><figcaption class="lookbook-label">On-model fit reference</figcaption></figure>`
     : `<figure class="lookbook-card lookbook-portrait"><img src="${asset('c1')}" alt="${product.model} C1 optical frame with magnetic sun clip attached"><figcaption class="lookbook-label">C1 / assembled view</figcaption></figure>`;
-  const contextDescription = product.hasOnModel
+  const contextDescription = hasStyleReference
+    ? 'A lifestyle styling reference accompanies the photographed base frame, removable magnetic sun clip and assembled product views. Use the white-background images for exact component and colour review.'
+    : product.hasOnModel
     ? 'Review the base frame, the separate magnetic sun clip, an assembled colour direction and an on-model fit reference before discussing a two-in-one product program.'
     : 'Review the optical base, separate magnetic sun clip and assembled colour directions before discussing a two-in-one product program.';
-  frameContext.innerHTML = `<div class="wrap"><div class="lookbook-head"><div><span class="eyebrow">FRAME IN CONTEXT</span><h2>Optical base, magnetic clip and assembled view.</h2></div><p>${contextDescription}</p></div><div class="lookbook-grid"><figure class="lookbook-card lookbook-still"><img src="${asset('c1-detail')}" alt="${product.model} C1 optical base frame"><figcaption class="lookbook-label">C1 / optical base</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset('c1-profile')}" alt="${product.model} C1 separate magnetic sun clip"><figcaption class="lookbook-label">C1 / magnetic sun clip</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset('c2')}" alt="${product.model} C2 optical frame with magnetic sun clip"><figcaption class="lookbook-label">C2 / assembled view</figcaption></figure>${fourthContextCard}<div class="lookbook-spec"><div class="lookbook-spec-title">Sample dimensions<small>Photographed product specification</small></div><div class="lookbook-measure"><strong>${lens} mm</strong><span>Lens width</span></div><div class="lookbook-measure"><strong>${bridge} mm</strong><span>Bridge</span></div><div class="lookbook-measure"><strong>${temple} mm</strong><span>Temple</span></div></div></div></div>`;
+  frameContext.innerHTML = `<div class="wrap"><div class="lookbook-head"><div><span class="eyebrow">FRAME IN CONTEXT</span><h2>Optical base, magnetic clip and assembled view.</h2></div><p>${contextDescription}</p></div><div class="lookbook-grid">${primaryContextCard}<figure class="lookbook-card lookbook-portrait"><img src="${asset('c1-profile')}" alt="${product.model} C1 separate magnetic sun clip"><figcaption class="lookbook-label">C1 / magnetic sun clip</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset('c2')}" alt="${product.model} C2 optical frame with magnetic sun clip"><figcaption class="lookbook-label">C2 / assembled view</figcaption></figure>${fourthContextCard}<div class="lookbook-spec"><div class="lookbook-spec-title">Sample dimensions<small>Photographed product specification</small></div><div class="lookbook-measure"><strong>${lens} mm</strong><span>Lens width</span></div><div class="lookbook-measure"><strong>${bridge} mm</strong><span>Bridge</span></div><div class="lookbook-measure"><strong>${temple} mm</strong><span>Temple</span></div></div></div></div>`;
   document.querySelector('.technical').after(frameContext);
 
   document.querySelector('.services-head p').textContent = 'Move from a selected optical base and clip-on direction into a clear sampling, branding and delivery conversation.';

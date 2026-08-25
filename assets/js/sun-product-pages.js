@@ -38,7 +38,15 @@
   const product = products[slug];
   if (!product) return;
 
-  const asset = (file) => `assets/products/${slug}/${slug}-${file}.jpg`;
+  const styleReferenceSlugs = new Set(['els8010', 'els8012', 'els8016', 'els8017', 'els8037', 'els8038', 'els8039', 'els8040', 'els8041', 'els8042', 'els8043', 'els8044', 'els8045', 'els8046', 'els8047', 'els8048', 'els8049', 'els8050', 'els8051', 'els8053', 'els8054', 'els8055', 'els8056', 'els8057', 'els8058', 'els8059', 'els8060', 'els8061', 'em1206', 'em1207']);
+  const hasStyleReference = styleReferenceSlugs.has(slug);
+  const hasOnModel = Boolean(product.onModel) || hasStyleReference;
+  const asset = (file) => {
+    if (styleReferenceSlugs.has(slug) && file === 'on-model') {
+      return `assets/products/${slug}/${slug}-on-model-accurate.png`;
+    }
+    return `assets/products/${slug}/${slug}-${file}.jpg`;
+  };
   const stage = document.querySelector('.main-image');
   const stageImage = document.querySelector('#main-product-image');
   const thumbs = document.querySelector('.thumbs');
@@ -47,10 +55,11 @@
   const imageNote = document.querySelector('.image-note');
   const [lens, bridge, temple] = product.size;
   const colorsShown = Array.from({ length: product.colors || 4 }, (_, index) => `C${index + 1}`);
-  const onModelThumb = product.onModel ? `<button class="thumb" type="button" data-image="${asset('on-model')}" data-color="On-model view" data-label="on-model fit"><img src="${asset('on-model')}" alt="${product.model} sunglasses shown on a model"></button>` : '';
+  const onModelThumb = hasOnModel ? `<button class="thumb" type="button" data-image="${asset('on-model')}" data-color="On-model view" data-label="${hasStyleReference ? 'Lifestyle styling reference' : 'on-model fit'}"><img src="${asset('on-model')}" alt="${hasStyleReference ? 'Sunglasses lifestyle styling reference' : `${product.model} sunglasses shown on a model`}"></button>` : '';
+  const colourBoardThumb = hasStyleReference ? '' : `<button class="thumb" type="button" data-image="${asset('lookbook-stack')}" data-color="Colour board" data-label="Photographed colour board"><img src="${asset('lookbook-stack')}" alt="${product.model} photographed colour board"></button>`;
 
   document.title = `${product.model} Acetate Sunglasses | CarpeDiem Optic`;
-  const metaColourCopy = product.onModel ? `${colorsShown.length} photographed colourways` : 'four photographed colourways';
+  const metaColourCopy = hasOnModel ? `${colorsShown.length} photographed colourways` : 'four photographed colourways';
   document.querySelector('meta[name="description"]')?.setAttribute('content', `${product.model} acetate sunglasses by CarpeDiem Optic. Explore ${metaColourCopy}, construction details and OEM or private label inquiry options.`);
   document.querySelectorAll('.brand-name').forEach((element) => { element.textContent = 'CarpeDiem Optic'; });
   document.querySelectorAll('footer').forEach((element) => { element.innerHTML = element.innerHTML.replaceAll('Carpe Diem Optic', 'CarpeDiem Optic'); });
@@ -63,7 +72,7 @@
   document.querySelector('.status').textContent = 'Available for project discussion';
   document.querySelector('.buyer-summary').innerHTML = `<div class="buyer-summary-item"><strong>Acetate</strong><span>Frame material</span></div><div class="buyer-summary-item"><strong>${colorsShown.length}</strong><span>Colourways shown</span></div><div class="buyer-summary-item"><strong>OEM</strong><span>Project support</span></div>`;
 
-  thumbs.innerHTML = `<button class="thumb active" type="button" data-image="${asset('front')}" data-color="Front view" data-label="Front view"><img src="${asset('front')}" alt="${product.model} acetate sunglasses front view"></button>` + colorsShown.map((code) => `<button class="thumb" type="button" data-image="${asset(code.toLowerCase())}" data-color="${code}" data-label="${code} photographed colourway"><img src="${asset(code.toLowerCase())}" alt="${product.model} ${code} acetate sunglasses"></button>`).join('') + `<button class="thumb" type="button" data-image="${asset('c1-detail')}" data-color="Construction detail" data-label="Construction detail"><img src="${asset('c1-detail')}" alt="${product.model} construction detail"></button>${onModelThumb}<button class="thumb" type="button" data-image="${asset('lookbook-stack')}" data-color="Colour board" data-label="Photographed colour board"><img src="${asset('lookbook-stack')}" alt="${product.model} photographed colour board"></button>`;
+  thumbs.innerHTML = `<button class="thumb active" type="button" data-image="${asset('front')}" data-color="Front view" data-label="Front view"><img src="${asset('front')}" alt="${product.model} acetate sunglasses front view"></button>` + colorsShown.map((code) => `<button class="thumb" type="button" data-image="${asset(code.toLowerCase())}" data-color="${code}" data-label="${code} photographed colourway"><img src="${asset(code.toLowerCase())}" alt="${product.model} ${code} acetate sunglasses"></button>`).join('') + `<button class="thumb" type="button" data-image="${asset('c1-detail')}" data-color="Construction detail" data-label="Construction detail"><img src="${asset('c1-detail')}" alt="${product.model} construction detail"></button>${onModelThumb}${colourBoardThumb}`;
   colors.innerHTML = colorsShown.map((code) => `<button class="color" type="button" data-image="${asset(code.toLowerCase())}" data-color="${code}" data-label="${code} photographed colourway"><img src="${asset(code.toLowerCase())}" alt="Select ${product.model} ${code}"></button>`).join('');
 
   const zoomLens = document.querySelector('.zoom-lens');
@@ -72,7 +81,7 @@
     stageImage.alt = `${product.model} ${choice.dataset.label || choice.dataset.color} acetate sunglasses`;
     selected.textContent = choice.dataset.color;
     stage.classList.toggle('model-view', choice.dataset.color === 'On-model view');
-    imageNote.textContent = choice.dataset.color === 'Colour board' ? 'COLOUR RANGE' : choice.dataset.color === 'On-model view' ? 'FIT REFERENCE' : 'PRODUCT SAMPLE';
+    imageNote.textContent = choice.dataset.color === 'Colour board' ? 'COLOUR RANGE' : choice.dataset.color === 'On-model view' ? (hasStyleReference ? 'LIFESTYLE REFERENCE' : 'FIT REFERENCE') : 'PRODUCT SAMPLE';
     document.querySelectorAll('.thumb,.color').forEach((item) => item.classList.remove('active'));
     document.querySelectorAll(`[data-color="${choice.dataset.color}"]`).forEach((item) => item.classList.add('active'));
     if (zoomLens) zoomLens.style.backgroundImage = `url("${stageImage.src}")`;
@@ -88,8 +97,10 @@
   const context = document.createElement('section');
   context.className = 'lookbook';
   const contextLast = product.onModel ? `<figure class="lookbook-card"><img src="${asset('on-model')}" alt="${product.model} sunglasses fit reference"><figcaption class="lookbook-label">Fit reference</figcaption></figure>` : `<figure class="lookbook-card"><img src="${asset('lookbook-hinge')}" alt="${product.model} hinge detail"><figcaption class="lookbook-label">Hinge detail</figcaption></figure>`;
-  const contextCopy = product.onModel ? 'Review the photographed sunglasses sample from its front profile to its temple details and fit reference before selecting a colour direction for development.' : 'Review the photographed sunglasses sample from its front profile to its temple and hinge details before selecting a colour direction for development.';
-  context.innerHTML = `<div class="wrap"><div class="lookbook-head"><div><span class="eyebrow">FRAME IN CONTEXT</span><h2>Colour, profile and construction.</h2></div><p>${contextCopy}</p></div><div class="lookbook-grid"><figure class="lookbook-card lookbook-still"><img src="${asset('lookbook-still')}" alt="${product.model} sunglasses still life"><figcaption class="lookbook-label">Colour direction</figcaption></figure><figure class="lookbook-card"><img src="${asset('front')}" alt="${product.model} front view"><figcaption class="lookbook-label">Front view</figcaption></figure><figure class="lookbook-card"><img src="${asset('lookbook-temple')}" alt="${product.model} temple detail"><figcaption class="lookbook-label">Temple detail</figcaption></figure>${contextLast}<div class="lookbook-spec"><div class="lookbook-spec-title">Sample dimensions<small>Photographed product specification</small></div><div class="lookbook-measure"><strong>${lens} mm</strong><span>Lens width</span></div><div class="lookbook-measure"><strong>${bridge} mm</strong><span>Bridge</span></div><div class="lookbook-measure"><strong>${temple} mm</strong><span>Temple</span></div></div></div></div>`;
+  const contextCopy = hasStyleReference ? 'A lifestyle styling reference accompanies the photographed product views. It communicates the collection mood only; use this model’s white-background images for exact frame, lens and colour review.' : product.onModel ? 'Review the photographed sunglasses sample from its front profile to its temple details and fit reference before selecting a colour direction for development.' : 'Review the photographed sunglasses sample from its front profile to its temple and hinge details before selecting a colour direction for development.';
+  const primaryContextCard = hasStyleReference ? `<figure class="lookbook-card lookbook-still"><img src="${asset('on-model')}" alt="Sunglasses lifestyle styling reference"><figcaption class="lookbook-label">Lifestyle styling reference</figcaption></figure>` : `<figure class="lookbook-card lookbook-still"><img src="${asset('lookbook-still')}" alt="${product.model} sunglasses still life"><figcaption class="lookbook-label">Colour direction</figcaption></figure>`;
+  const contextEndCard = hasStyleReference ? `<figure class="lookbook-card"><img src="${asset('lookbook-hinge')}" alt="${product.model} hinge detail"><figcaption class="lookbook-label">Hinge detail</figcaption></figure>` : contextLast;
+  context.innerHTML = `<div class="wrap"><div class="lookbook-head"><div><span class="eyebrow">FRAME IN CONTEXT</span><h2>Colour, profile and construction.</h2></div><p>${contextCopy}</p></div><div class="lookbook-grid">${primaryContextCard}<figure class="lookbook-card"><img src="${asset('front')}" alt="${product.model} front view"><figcaption class="lookbook-label">Front view</figcaption></figure><figure class="lookbook-card"><img src="${asset('lookbook-temple')}" alt="${product.model} temple detail"><figcaption class="lookbook-label">Temple detail</figcaption></figure>${contextEndCard}<div class="lookbook-spec"><div class="lookbook-spec-title">Sample dimensions<small>Photographed product specification</small></div><div class="lookbook-measure"><strong>${lens} mm</strong><span>Lens width</span></div><div class="lookbook-measure"><strong>${bridge} mm</strong><span>Bridge</span></div><div class="lookbook-measure"><strong>${temple} mm</strong><span>Temple</span></div></div></div></div>`;
   document.querySelector('.technical').after(context);
 
   document.querySelector('.inquiry .eyebrow').textContent = `${product.model} PROJECT INQUIRY`;
