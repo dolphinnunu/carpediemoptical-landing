@@ -96,9 +96,9 @@
   const [lens, bridge, temple] = product.size || [];
   const asset = (file) => {
     if (styleReferenceSlugs.has(slug) && file === 'on-model') {
-      return `assets/products/${slug}/${slug}-on-model-accurate.png`;
+      return `assets/products/${slug}/${slug}-on-model-accurate.webp`;
     }
-    return `assets/products/${slug}/${slug}-${file}.jpg`;
+    return `assets/products/${slug}/${slug}-${file}.webp`;
   };
   const c1 = asset('c1');
   const stage = document.querySelector('.main-image');

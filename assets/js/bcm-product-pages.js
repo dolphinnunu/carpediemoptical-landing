@@ -22,9 +22,9 @@
   const [lens, bridge, temple] = product.size;
   const asset = (file) => {
     if (styleReferenceSlugs.has(slug) && file === 'on-model') {
-      return `assets/products/${slug}/${slug}-on-model-accurate.png`;
+      return `assets/products/${slug}/${slug}-on-model-accurate.webp`;
     }
-    return `assets/products/${slug}/${slug}-${file}.jpg`;
+    return `assets/products/${slug}/${slug}-${file}.webp`;
   };
   const stage = document.querySelector('.main-image');
   const stageImage = document.querySelector('#main-product-image');
@@ -49,9 +49,9 @@
   document.querySelector('.buyer-summary').innerHTML = '<div class="buyer-summary-item"><strong>2-in-1</strong><span>Base frame + sun clip</span></div><div class="buyer-summary-item"><strong>6</strong><span>Colourways shown</span></div><div class="buyer-summary-item"><strong>OEM</strong><span>Project support</span></div>';
   document.querySelector('.contact-note').innerHTML = '<span>+</span><span><b>Need a variation?</b> Ask about colour direction, clip-on lens route, logo, packaging or quantities.</span>';
 
-  const choice = (file, color, label, alt, active = false) => `<button class="thumb${active ? ' active' : ''}" type="button" data-image="${asset(file)}" data-color="${color}" data-label="${label}"><img src="${asset(file)}" alt="${alt}"></button>`;
+  const choice = (file, color, label, alt, active = false) => `<button class="thumb${active ? ' active' : ''}" type="button" data-image="${asset(file)}" data-color="${color}" data-label="${label}"><img src="${asset(file)}" alt="${alt}" loading="lazy" decoding="async"></button>`;
   thumbs.innerHTML = colorways.map((code, index) => choice(`c${index + 1}`, code, `${code} frame + magnetic sun clip`, `${product.model} ${code} optical frame with magnetic sun clip attached`, index === 0)).join('') + choice('c1-detail', 'Optical base', 'Optical base frame', `${product.model} C1 optical base frame`) + choice('c1-profile', 'Magnetic sun clip', 'Separate magnetic sun clip', `${product.model} C1 separate magnetic sun clip`) + (hasOnModel ? choice('on-model', 'On model', hasStyleReference ? 'Lifestyle styling reference' : 'On-model fit reference', hasStyleReference ? 'Magnetic clip-on lifestyle styling reference' : `${product.model} optical base frame on-model fit reference`) : '');
-  colors.innerHTML = colorways.map((code, index) => `<button class="color${index === 0 ? ' active' : ''}" type="button" data-image="${asset(`c${index + 1}`)}" data-color="${code}" data-label="${code} frame + magnetic sun clip"><img src="${asset(`c${index + 1}`)}" alt="Select ${product.model} ${code} with magnetic sun clip"></button>`).join('');
+  colors.innerHTML = colorways.map((code, index) => `<button class="color${index === 0 ? ' active' : ''}" type="button" data-image="${asset(`c${index + 1}`)}" data-color="${code}" data-label="${code} frame + magnetic sun clip"><img src="${asset(`c${index + 1}`)}" alt="Select ${product.model} ${code} with magnetic sun clip" loading="lazy" decoding="async"></button>`).join('');
   document.querySelector('.field-label').firstChild.textContent = 'View ';
   stage.insertAdjacentHTML('beforeend', `<figure class="component-preview base-preview"><img src="${asset('c1-base')}" alt="${product.model} C1 optical base frame"><span>Optical base frame</span></figure><figure class="component-preview clip-preview"><img src="${asset('c1-clip')}" alt="${product.model} C1 removable magnetic sun clip"><span>Removable magnetic sun clip</span></figure>`);
   const basePreviewImage = stage.querySelector('.base-preview img');

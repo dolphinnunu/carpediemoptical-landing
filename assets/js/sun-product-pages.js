@@ -43,9 +43,9 @@
   const hasOnModel = Boolean(product.onModel) || hasStyleReference;
   const asset = (file) => {
     if (styleReferenceSlugs.has(slug) && file === 'on-model') {
-      return `assets/products/${slug}/${slug}-on-model-accurate.png`;
+      return `assets/products/${slug}/${slug}-on-model-accurate.webp`;
     }
-    return `assets/products/${slug}/${slug}-${file}.jpg`;
+    return `assets/products/${slug}/${slug}-${file}.webp`;
   };
   const stage = document.querySelector('.main-image');
   const stageImage = document.querySelector('#main-product-image');

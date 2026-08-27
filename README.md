@@ -32,6 +32,18 @@ Vercel is connected to that repository and will redeploy automatically after eac
 - Shared language behavior and Spanish terminology live in `assets/js/language-switcher.js` and `assets/js/i18n-es.js`.
 - Do not edit generated files inside `es/` directly because they are replaced during the next build.
 
+## Product image optimization
+
+Before previewing or publishing newly added products, run:
+
+```powershell
+python .\scripts\optimize-web-images.py
+node .\scripts\switch-product-images-to-webp.mjs
+node .\scripts\build-spanish-site.mjs
+```
+
+Original JPG and PNG files remain in the local product archive. Website pages use smaller WebP derivatives, and the publish script excludes redundant originals from the deployed bundle.
+
 ## Local structure note
 
 This folder keeps the original source files in place for stability.
