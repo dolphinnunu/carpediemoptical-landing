@@ -1,5 +1,26 @@
 (() => {
   const translations = new Map(Object.entries({
+    'ACETATE & COLOUR': 'ACETATO Y COLOR',
+    'METAL & PRECISION': 'METAL Y PRECISIÓN',
+    'SUN & PRIVATE LABEL': 'SOL Y MARCA PRIVADA',
+    'CUSTOM DEVELOPMENT': 'DESARROLLO A MEDIDA',
+    'COMPONENTS & PACKAGING': 'COMPONENTES Y EMBALAJE',
+    'EYEWEAR COMPONENTS': 'COMPONENTES PARA GAFAS',
+    'Eyewear Components': 'Componentes para gafas',
+    'Lenses, hinge pins, cases and retail-ready accessories.': 'Lentes, pasadores de bisagra, estuches y accesorios listos para la venta.',
+    'Explore eyewear components': 'Ver componentes para gafas',
+    'Explore acetate optical frames': 'Ver monturas ópticas de acetato',
+    'Request a sample route →': 'Solicitar opciones de muestras →',
+    'Plan your delivery →': 'Planificar la entrega →',
+    'Talk to our team →': 'Contactar con nuestro equipo →',
+    'Technical file': 'Expediente técnico',
+    'CATALOG': 'CATÁLOGO',
+    'CONTACT': 'CONTACTO',
+    'Custom Acetate': 'Acetato personalizado',
+    'Mixed Material': 'Materiales combinados',
+    'Main navigation': 'Navegación principal',
+    'Quick contact actions': 'Opciones de contacto rápido',
+    'Social profiles': 'Redes sociales',
     'Eyewear manufacturing for international buyers': 'Fabricación de gafas para compradores internacionales',
     'OEM / ODM / Private label': 'OEM / ODM / Marca privada',
     'Response within 1 business day': 'Respuesta en 1 día laborable',
@@ -218,6 +239,8 @@
         .replace(/^Phone:/, 'Teléfono:')
         .replace(/PROJECT INQUIRY$/, 'CONSULTA DE PROYECTO')
         .replace(/ models shown$/, ' modelos mostrados');
+      translated = translated.replace('All rights reserved.', 'Todos los derechos reservados.')
+        .replace('OEM · ODM · Private Label · Global Shipping', 'OEM · ODM · Marca privada · Envíos internacionales');
     }
     return translated === trimmed ? text : text.replace(trimmed, translated);
   }

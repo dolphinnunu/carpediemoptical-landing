@@ -1,4 +1,5 @@
 .workbuddy/
+node_modules/
 publish/
 Thumbs.db
 .DS_Store

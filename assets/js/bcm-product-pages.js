@@ -1,4 +1,5 @@
 (() => {
+  document.querySelectorAll('.component-preview').forEach(element => element.remove());
   const match = location.pathname.match(/product-(bcm\d+)\.html$/i);
   if (!match) return;
 
