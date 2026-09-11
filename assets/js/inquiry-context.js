@@ -1,10 +1,9 @@
 (() => {
   const model = location.pathname.match(/product-([^/]+)\.html$/i)?.[1].toUpperCase();
   if (!model) return;
-  document.addEventListener('click', (event) => {
-    const link = event.target.closest('a[href]');
-    if (!link) return;
+  function updateLink(link) {
     const raw = link.getAttribute('href');
+    if (!raw) return;
     const email = raw.startsWith('mailto:info@carpediemoptic.com');
     const whatsapp = raw.startsWith('https://wa.me/8615869665316');
     if (!email && !whatsapp) return;
@@ -17,5 +16,17 @@
     link.href = email
       ? `mailto:info@carpediemoptic.com?subject=${encodeURIComponent(`${es ? 'Consulta' : 'Inquiry'} - ${model}`)}&body=${encodeURIComponent(message)}`
       : `https://wa.me/8615869665316?text=${encodeURIComponent(message)}`;
+  }
+
+  function updateInquiryLinks() {
+    document.querySelectorAll('a[href^="mailto:info@carpediemoptic.com"], a[href^="https://wa.me/8615869665316"]')
+      .forEach(updateLink);
+  }
+
+  updateInquiryLinks();
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href]');
+    if (link) updateLink(link);
+    if (event.target.closest('.colors .color')) setTimeout(updateInquiryLinks, 0);
   }, true);
 })();

@@ -1,5 +1,10 @@
 (() => {
   const translations = new Map(Object.entries({
+    'TR90 Optical': 'Monturas ópticas TR90',
+    'TR90 OPTICAL': 'MONTURAS ÓPTICAS TR90',
+    'TR90 Optical frame / sample catalog': 'Montura óptica TR90 / catálogo de muestras',
+    'TR90 optical frame sample': 'Muestra de montura óptica TR90',
+    'Review the TR90 front profile, temple construction and available colourways.': 'Consulte el perfil frontal TR90, la construcción de las varillas y los colores disponibles.',
     'ACETATE & COLOUR': 'ACETATO Y COLOR',
     'METAL & PRECISION': 'METAL Y PRECISIÓN',
     'SUN & PRIVATE LABEL': 'SOL Y MARCA PRIVADA',
@@ -21,6 +26,16 @@
     'Main navigation': 'Navegación principal',
     'Quick contact actions': 'Opciones de contacto rápido',
     'Social profiles': 'Redes sociales',
+    'Metal optical frame sample': 'Muestra de montura óptica de metal',
+    'TR90 optical frame sample': 'Muestra de montura óptica de TR90',
+    'Click a colorway to update the main view.': 'Seleccione un color para actualizar la vista principal.',
+    'PRODUCT SAMPLE': 'MUESTRA DE PRODUCTO',
+    'READY FOR DEVELOPMENT': 'LISTO PARA DESARROLLO',
+    'HOVER TO ZOOM': 'PASE EL CURSOR PARA AMPLIAR',
+    'THREE-QUARTER VIEW': 'VISTA TRES CUARTOS',
+    'COLOURWAY VIEW': 'VISTA DE COLOR',
+    'AI STYLING REFERENCE': 'REFERENCIA VISUAL GENERADA CON IA',
+    'For a quotation, specify quantity, colour allocation, destination and branding. Sample availability, MOQ per style/colour, production timing and included packaging are confirmed with your quotation.': 'Para recibir una cotización, indique la cantidad, la distribución por colores, el destino y la personalización de marca. La disponibilidad de muestras, el pedido mínimo por modelo o color, el plazo de producción y el embalaje incluido se confirmarán con la cotización.',
     'Eyewear manufacturing for international buyers': 'Fabricación de gafas para compradores internacionales',
     'OEM / ODM / Private label': 'OEM / ODM / Marca privada',
     'Response within 1 business day': 'Respuesta en 1 día laborable',
@@ -237,6 +252,9 @@
         .replace(/^View details/, 'Ver detalles')
         .replace(/^Request info/, 'Solicitar información')
         .replace(/^Phone:/, 'Teléfono:')
+        .replace(/Three-quarter view/gi, 'Vista tres cuartos')
+        .replace(/Colourway view/gi, 'Vista de color')
+        .replace(/photographed colourway/gi, 'color fotografiado')
         .replace(/PROJECT INQUIRY$/, 'CONSULTA DE PROYECTO')
         .replace(/ models shown$/, ' modelos mostrados');
       translated = translated.replace('All rights reserved.', 'Todos los derechos reservados.')
@@ -283,6 +301,18 @@
       if (summaryLabels[2]) summaryLabels[2].textContent = 'Asistencia al proyecto';
       const note = info.querySelector('.contact-note');
       if (note) note.innerHTML = '<span>+</span><span><b>¿Necesita una variante?</b> Consúltenos sobre colores, lentes para el clip, logotipo, embalaje o cantidades.</span>';
+    } else if (isOptical && /^VAL00(?:1[7-9]|2[0-3])$/.test(model)) {
+      document.title = `${model} | Montura óptica TR90 | CarpeDiem Optic`;
+      if (eyebrow) eyebrow.textContent = 'Montura óptica TR90 / catálogo de muestras';
+      if (intro) intro.textContent = 'Montura óptica TR90. Consulte los colores disponibles, el perfil frontal y la construcción de las varillas, y envíenos sus preferencias y requisitos del proyecto.';
+      const note = info.querySelector('.contact-note');
+      if (note) note.innerHTML = '<span>+</span><span><b>¿Necesita una variante?</b> Consúltenos sobre colores, acabados, logotipo, embalaje o cantidades.</span>';
+    } else if (isOptical && /^VAL00(?:0[1-9]|1[0-6])$/.test(model)) {
+      document.title = `${model} | Montura óptica de metal | CarpeDiem Optic`;
+      if (eyebrow) eyebrow.textContent = 'Montura óptica de metal / catálogo de muestras';
+      if (intro) intro.textContent = 'Muestra de montura óptica de metal. Consulte los colores fotografiados, el perfil frontal y los detalles de construcción como punto de partida para un desarrollo OEM, ODM o de marca privada.';
+      const note = info.querySelector('.contact-note');
+      if (note) note.innerHTML = '<span>+</span><span><b>¿Necesita una variante?</b> Consúltenos sobre colores, acabados, logotipo, embalaje o cantidades.</span>';
     } else if (isOptical) {
       document.title = `${model} | Montura óptica de acetato | CarpeDiem Optic`;
       if (eyebrow) eyebrow.textContent = 'Montura óptica de acetato / catálogo de muestras';
@@ -321,6 +351,40 @@
     if (inquiryCopy) inquiryCopy.textContent = isClipOn
       ? 'Indique la cantidad prevista, el color preferido, el tipo de lente para el clip, la personalización de marca y la fecha de entrega. Le ayudaremos a definir el siguiente paso.'
       : 'Indique la cantidad prevista, el mercado, el color preferido, la personalización de marca y la fecha de entrega. Le ayudaremos a definir el siguiente paso para el muestreo o la producción.';
+
+    const imageNote = document.querySelector('.image-note');
+    const zoomHint = document.querySelector('.zoom-hint');
+    if (imageNote) imageNote.textContent = 'MUESTRA DE PRODUCTO';
+    if (zoomHint) zoomHint.textContent = 'Pase el cursor para ampliar';
+    document.documentElement.classList.add('language-es');
+    const style = document.createElement('style');
+    style.textContent = '.language-es .model-code::after{content:"LISTO PARA DESARROLLO"}';
+    document.head.appendChild(style);
+
+    document.querySelectorAll('[data-label], [data-color], img[alt]').forEach((element) => {
+      ['data-label', 'data-color', 'alt'].forEach((attribute) => {
+        const value = element.getAttribute(attribute);
+        if (!value) return;
+        element.setAttribute(attribute, value
+          .replace(/three-quarter view/gi, 'vista tres cuartos')
+          .replace(/colourway view/gi, 'vista de color')
+          .replace(/AI styling reference/gi, 'referencia visual generada con IA')
+          .replace(/front view/gi, 'vista frontal')
+          .replace(/photographed sample/gi, 'muestra fotografiada')
+          .replace(/photographed colourway/gi, 'color fotografiado')
+          .replace(/TR90 optical frame/gi, 'montura óptica TR90')
+          .replace(/metal optical frame/gi, 'montura óptica de metal')
+          .replace(/acetate optical frame/gi, 'montura óptica de acetato')
+          .replace(/^Select /i, 'Seleccionar '));
+      });
+    });
+    const gallery = document.querySelector('.thumbs');
+    const mainImage = document.querySelector('#main-product-image');
+    if (gallery) gallery.setAttribute('aria-label', 'Opciones de imagen del producto');
+    if (mainImage) mainImage.setAttribute('aria-label', `Ampliar imagen de ${model}`);
+    document.querySelectorAll('figure[aria-label]').forEach((figure) => {
+      figure.setAttribute('aria-label', translateText(figure.getAttribute('aria-label')));
+    });
   }
 
   function localizeLinks() {

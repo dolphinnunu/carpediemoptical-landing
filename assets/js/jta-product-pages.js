@@ -1,9 +1,32 @@
 (() => {
-  const match = location.pathname.match(/product-((?:yg|he|d)\d+)\.html$/i);
+  const match = location.pathname.match(/product-((?:yg|he|d|val)\d+)\.html$/i);
   if (!match) return;
 
   const fiveMetalColorways = ['C1', 'C2', 'C3', 'C4', 'C5'].map((code) => ({ code, name: `${code} photographed sample` }));
   const products = {
+    val0017: { model: 'VAL0017', size: ['53','18','143'], category: 'TR90 Optical', material: 'TR90', main: 'front', colorways: ['C1','C2','C3','C4'].map(code => ({code, name: code + ' photographed sample'})), sourceAnglesOnly: true, context: { file: 'lookbook-stack', label: 'Front view', alt: 'VAL0017 TR90 front view' } },
+    val0018: { model: 'VAL0018', size: ['53','18','143'], category: 'TR90 Optical', material: 'TR90', main: 'front', colorways: ['C1','C2','C3','C4','C5','C6'].map(code => ({code, name: code + ' photographed sample'})), sourceAnglesOnly: true, context: { file: 'lookbook-stack', label: 'Front view', alt: 'VAL0018 TR90 front view' } },
+    val0019: { model: 'VAL0019', size: ['54','17','145'], category: 'TR90 Optical', material: 'TR90', main: 'front', colorways: ['C1','C2','C3','C4','C5'].map(code => ({code, name: code + ' photographed sample'})), sourceAnglesOnly: true, context: { file: 'lookbook-stack', label: 'Front view', alt: 'VAL0019 TR90 front view' } },
+    val0020: { model: 'VAL0020', size: ['55','18','145'], category: 'TR90 Optical', material: 'TR90', main: 'front', colorways: ['C1','C2','C3','C4','C5'].map(code => ({code, name: code + ' photographed sample'})), sourceAnglesOnly: true, context: { file: 'lookbook-stack', label: 'Front view', alt: 'VAL0020 TR90 front view' } },
+    val0021: { model: 'VAL0021', category: 'TR90 Optical', material: 'TR90', main: 'front', colorways: ['C1','C2','C3','C4','C5','C6'].map(code => ({code, name: code + ' photographed sample'})), sourceAnglesOnly: true, context: { file: 'lookbook-stack', label: 'Front view', alt: 'VAL0021 TR90 front view' } },
+    val0022: { model: 'VAL0022', size: ['55','19','145'], category: 'TR90 Optical', material: 'TR90', main: 'front', colorways: ['C1','C2','C3','C4','C5','C6'].map(code => ({code, name: code + ' photographed sample'})), sourceAnglesOnly: true, context: { file: 'lookbook-stack', label: 'Front view', alt: 'VAL0022 TR90 front view' } },
+    val0023: { model: 'VAL0023', size: ['57','18','145'], category: 'TR90 Optical', material: 'TR90', main: 'front', colorways: ['C1','C2','C3','C4','C5','C6'].map(code => ({code, name: code + ' photographed sample'})), sourceAnglesOnly: true, context: { file: 'lookbook-stack', label: 'Front view', alt: 'VAL0023 TR90 front view' } },
+    val0001: { model: 'VAL0001', size: ["53","17","145"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0002: { model: 'VAL0002', size: ["56","17","140"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0003: { model: 'VAL0003', size: ["54","17","142"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0004: { model: 'VAL0004', size: ["55","18","140"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0005: { model: 'VAL0005', size: ["53","18","140"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0006: { model: 'VAL0006', size: ["54","17","145"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0007: { model: 'VAL0007', size: ["54","17","145"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0008: { model: 'VAL0008', size: ["53","17","145"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0009: { model: 'VAL0009', size: ["54","17","145"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4","C5"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0010: { model: 'VAL0010', size: ["55","17","145"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0011: { model: 'VAL0011', size: ["55","17","145"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4","C5"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0012: { model: 'VAL0012', size: ["55","16","145"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4","C5","C6"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0013: { model: 'VAL0013', size: ["55","16","145"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0014: { model: 'VAL0014', size: ["55","16","145"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4","C5","C6"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0015: { model: 'VAL0015', size: ["56","16","145"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4","C5"].map(code => ({code, name: code + ' photographed sample'})), verifiedModel: true },
+    val0016: { model: 'VAL0016', size: ["54","18","140"], category: 'Metal Optical', material: 'Metal', main: 'front', colorways: ["C1","C2","C3","C4"].map(code => ({code, name: code + ' photographed sample'})), sourceAnglesOnly: true, context: { file: 'lookbook-stack', label: 'C1 product reference', alt: 'VAL0016 C1 photographed product view' } },
     yg21285: { model: 'YG21285', size: ['53', '21', '145'] },
     yg21287: { model: 'YG21287', size: ['53', '17', '145'] },
     yg21288: { model: 'YG21288', size: ['56', '19', '145'] },
@@ -87,10 +110,12 @@
   };
   const slug = match[1].toLowerCase();
   const product = products[slug];
+  if (product && ['val0017','val0018','val0019','val0020','val0021','val0022','val0023'].includes(slug)) product.verifiedModel = true;
   if (!product) return;
 
   // Only verified, product-specific on-model images are allowed to enter this renderer.
   const styleReferenceSlugs = new Set(['yg21285', 'yg21286', 'yg21287', 'yg21288', 'yg21289', 'yg21290', 'yg21291', 'yg78145', 'yg78146', 'yg21318', 'yg21320', 'yg78165', 'd3452', 'd3721', 'd3727', 'd3743', 'he3111', 'he3112', 'he3113', 'he3114', 'he3115', 'he3116', 'he3117', 'he3118', 'he3119', 'he3120', 'he3121']);
+  if (product.verifiedModel) styleReferenceSlugs.add(slug);
   const hasStyleReference = styleReferenceSlugs.has(slug);
   const hasVerifiedSize = Array.isArray(product.size) && product.size.length === 3;
   const [lens, bridge, temple] = product.size || [];
@@ -109,33 +134,42 @@
   const imageNote = document.querySelector('.image-note');
   const colorways = product.colorways || ['C1', 'C2', 'C3', 'C4'].map((code) => ({ code, name: `${code} photographed sample` }));
   const context = hasStyleReference
-    ? { file: 'on-model', label: 'On-model fit', alt: `${product.model} ${product.category || 'acetate optical'} frame worn by a model`, isModel: true }
+    ? { file: 'on-model', label: product.verifiedModel ? 'C1 on-model reference' : 'On-model fit', alt: `${product.model} ${product.verifiedModel ? 'C1 ' : ''}${product.category || 'acetate optical'} frame worn by a model`, isModel: true }
     : product.context || { file: 'on-model', label: 'On model', alt: `${product.model} worn by a model` };
   const mainView = product.main ? { file: product.main, label: product.mainLabel || 'Front view' } : null;
   const lensElement = document.querySelector('.zoom-lens');
   const isMetal = product.category === 'Metal Optical';
-  const categoryName = isMetal ? 'Metal Optical' : 'Acetate Optical';
-  const productType = isMetal ? 'Metal optical frame sample' : 'Acetate optical frame sample';
+  const isTR90 = product.category === 'TR90 Optical';
+  const categoryName = isTR90 ? 'TR90 Optical' : isMetal ? 'Metal Optical' : 'Acetate Optical';
+  const productType = isTR90 ? 'TR90 optical frame sample' : isMetal ? 'Metal optical frame sample' : 'Acetate optical frame sample';
   const materialName = product.material || 'Acetate';
-  const descriptor = isMetal ? 'metal optical frame' : 'acetate optical frame';
+  const descriptor = isTR90 ? 'TR90 optical frame' : isMetal ? 'metal optical frame' : 'acetate optical frame';
+  if (isTR90) {
+    const privateLabelCopy = document.querySelector('.service-grid .service p');
+    if (privateLabelCopy) privateLabelCopy.textContent = 'Discuss colour direction, logo placement and product presentation around this TR90 optical style.';
+  }
 
   document.title = `${product.model} ${categoryName} Frame | CarpeDiem Optic`;
   document.querySelector('meta[name="description"]')?.setAttribute('content', `${product.model} ${descriptor} by CarpeDiem Optic. Explore ${colorways.length} photographed colourways, construction details and OEM or private label inquiry options.`);
   document.querySelectorAll('.brand-name').forEach((element) => { element.textContent = 'CarpeDiem Optic'; });
   document.querySelectorAll('footer').forEach((element) => { element.innerHTML = element.innerHTML.replaceAll('Carpe Diem Optic', 'CarpeDiem Optic'); });
   document.head.insertAdjacentHTML('beforeend', `<style>.main-image:before{content:'${product.model}'}.main-image:after{content:'C1 / VIEW'}.main-image img{transform:none!important}.main-image.model-view img{width:90%;height:90%;object-fit:cover}</style>`);
-  document.querySelector('.crumbs .wrap').innerHTML = `<a href="index.html">Home</a><span>/</span><a href="products.html?category=${isMetal ? 'metal' : 'optical'}">${categoryName}</a><span>/</span>${product.model}`;
+  document.querySelector('.crumbs .wrap').innerHTML = `<a href="index.html">Home</a><span>/</span><a href="products.html?category=${isTR90 ? 'tr90' : isMetal ? 'metal' : 'optical'}">${categoryName}</a><span>/</span>${product.model}`;
   document.querySelector('.product-info .eyebrow').textContent = `${categoryName} frame / sample catalog`;
   document.querySelector('.product-info h1').textContent = product.model;
   document.querySelector('.model-code').firstChild.textContent = `${product.model} / C1`;
-  document.querySelector('.intro').textContent = isMetal
+  document.querySelector('.intro').textContent = isTR90
+    ? `A TR90 optical frame with ${colorways.length} photographed colourways. Review the front profile, temple design and sample dimensions, then share your preferred colour and project requirements.`
+    : isMetal
     ? `A metal optical frame sample with a defined profile, refined rim construction and ${colorways.length} photographed colour directions. Review the frame, temples and construction details as a starting point for OEM, ODM or private label development.`
     : 'An acetate optical frame sample with a defined profile, layered material character and a considered temple construction. Review the photographed colorways as a starting point for OEM, ODM or private label development.';
   document.querySelector('.status').textContent = 'Available for project discussion';
   document.querySelector('.buyer-summary').innerHTML = `<div class="buyer-summary-item"><strong>${materialName}</strong><span>Frame material</span></div><div class="buyer-summary-item"><strong>${colorways.length}</strong><span>Colourways shown</span></div><div class="buyer-summary-item"><strong>OEM</strong><span>Project support</span></div>`;
   document.querySelector('.contact-note').innerHTML = '<span>+</span><span><b>Need a variation?</b> Ask about colour direction, logo, packaging, quantities or a related optical frame route.</span>';
 
-  thumbs.innerHTML = (mainView ? `<button class="thumb active" type="button" data-image="${asset(mainView.file)}" data-color="${mainView.label}" data-label="${mainView.label}"><img src="${asset(mainView.file)}" alt="${product.model} front view ${descriptor}"></button>` : '') + colorways.map((color, index) => `<button class="thumb${!mainView && index === 0 ? ' active' : ''}" type="button" data-image="${asset(color.code.toLowerCase())}" data-color="${color.code}" data-label="${color.name}"><img src="${asset(color.code.toLowerCase())}" alt="${product.model} ${color.code} ${color.name} ${descriptor}"></button>`).join('') + `<button class="thumb" type="button" data-image="${asset('c1-detail')}" data-color="C1 detail" data-label="Construction detail"><img src="${asset('c1-detail')}" alt="${product.model} temple construction detail"></button><button class="thumb" type="button" data-image="${asset(context.file)}" data-color="${context.label}" data-label="${context.label}"><img src="${asset(context.file)}" alt="${context.alt}"></button>`;
+  const detailLabel = product.sourceAnglesOnly ? 'C1 three-quarter view' : 'Construction detail';
+  const detailAlt = product.sourceAnglesOnly ? `${product.model} C1 three-quarter view` : `${product.model} temple construction detail`;
+  thumbs.innerHTML = (mainView ? `<button class="thumb active" type="button" data-image="${asset(mainView.file)}" data-color="${mainView.label}" data-label="${mainView.label}"><img src="${asset(mainView.file)}" alt="${product.model} front view ${descriptor}"></button>` : '') + colorways.map((color, index) => `<button class="thumb${!mainView && index === 0 ? ' active' : ''}" type="button" data-image="${asset(color.code.toLowerCase())}" data-color="${color.code}" data-label="${color.name}"><img src="${asset(color.code.toLowerCase())}" alt="${product.model} ${color.code} ${color.name} ${descriptor}"></button>`).join('') + `<button class="thumb" type="button" data-image="${asset('c1-detail')}" data-color="${detailLabel}" data-label="${detailLabel}"><img src="${asset('c1-detail')}" alt="${detailAlt}"></button><button class="thumb" type="button" data-image="${asset(context.file)}" data-color="${context.label}" data-label="${context.label}"><img src="${asset(context.file)}" alt="${context.alt}"></button>`;
   colors.innerHTML = colorways.map((color, index) => `<button class="color${index === 0 ? ' active' : ''}" type="button" data-image="${asset(color.code.toLowerCase())}" data-color="${color.code}" data-label="${color.name}"><img src="${asset(color.code.toLowerCase())}" alt="Select ${product.model} ${color.code}"></button>`).join('');
   if (mainView) {
     document.querySelector('.field-label').firstChild.textContent = 'View ';
@@ -169,6 +203,8 @@
   frameContext.setAttribute('aria-label', `${product.model} frame in context`);
   const contextDescription = hasStyleReference
     ? 'A lifestyle styling reference accompanies the photographed product views. It communicates the collection mood only; review the white-background product images for this model’s exact shape, colour and construction.'
+    : isTR90
+    ? 'Review the TR90 front profile, temple construction and available colourways.'
     : isMetal
     ? 'Review the photographed sample as a complete metal frame system: front profile, rim construction, temple detailing and available colour directions.'
     : 'Review the photographed sample as a complete frame system: the acetate front, temple construction, hinge detailing and available color directions.';
@@ -182,6 +218,14 @@
     ? `<figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-still')}" alt="${product.model} ${descriptor} front view"><figcaption class="lookbook-label">${mainView ? mainView.label : 'C1 / front view'}</figcaption></figure>`
     : `<figure class="lookbook-card lookbook-portrait"><img src="${asset(context.file)}" alt="${context.alt}"><figcaption class="lookbook-label">${context.label}</figcaption></figure>`;
   frameContext.innerHTML = `<div class="wrap"><div class="lookbook-head"><div><span class="eyebrow">FRAME IN CONTEXT</span><h2>Material character and construction.</h2></div><p>${contextDescription}</p></div><div class="lookbook-grid">${primaryContextCard}${secondaryContextCard}<figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-temple')}" alt="${product.model} temple detail"><figcaption class="lookbook-label">Temple detail</figcaption></figure><figure class="lookbook-card lookbook-portrait"><img src="${asset('lookbook-hinge')}" alt="${product.model} hinge construction detail"><figcaption class="lookbook-label">Hinge detail</figcaption></figure><div class="lookbook-spec">${contextMeasurements}</div></div></div>`;
+  if (product.verifiedModel || product.sourceAnglesOnly) {
+    const cards = frameContext.querySelectorAll('figure');
+    cards[2].querySelector('figcaption').textContent = 'C1 / Three-quarter view';
+    cards[2].querySelector('img').alt = `${product.model} C1 three-quarter view`;
+    cards[3].querySelector('img').src = asset('c2');
+    cards[3].querySelector('img').alt = `${product.model} C2 photographed colourway`;
+    cards[3].querySelector('figcaption').textContent = 'C2 / Colourway view';
+  }
   document.querySelector('.technical').after(frameContext);
 
   document.querySelector('.services-head .eyebrow').textContent = 'Project support';

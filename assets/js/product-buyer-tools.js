@@ -1,6 +1,21 @@
 (() => {
   const model = document.querySelector('.product-info h1')?.textContent.trim();
   if (!model) return;
+  const launchDate = document.querySelector('meta[name="product-launch-date"]')?.content;
+  const ageInDays = launchDate ? Math.floor((Date.now() - new Date(`${launchDate}T00:00:00Z`).getTime()) / 86400000) : Infinity;
+  const isNewArrival = ageInDays >= 0 && ageInDays < 7;
+  if (isNewArrival) {
+    const eyebrow = document.querySelector('.product-info .eyebrow');
+    if (eyebrow && !document.querySelector('.new-arrival-label')) {
+      const label = document.createElement('span');
+      label.className = 'new-arrival-label';
+      label.textContent = document.documentElement.lang.startsWith('es') ? 'NOVEDAD' : 'NEW ARRIVAL';
+      eyebrow.before(label);
+      const css = document.createElement('style');
+      css.textContent = '.new-arrival-label{display:inline-block;margin-bottom:12px;padding:6px 10px;border:1px solid var(--orange);border-radius:999px;background:rgba(255,253,247,.94);color:var(--orange);font-size:9px;font-weight:700;letter-spacing:.14em;line-height:1;text-transform:uppercase}';
+      document.head.append(css);
+    }
+  }
   let color = 'C1';
   const stage = document.querySelector('.main-image');
   const sync = () => {
@@ -48,6 +63,11 @@
   if (document.querySelector('img[src*="on-model-accurate"]')) {
     const p=document.querySelector('.lookbook-head p');
     if(p) p.textContent='AI-generated styling reference. Refer to the real product photographs and confirmed measurements for colour, construction and sizing. The styling image does not change with your selected colourway.';
+  }
+  if (/^VAL\d+$/.test(model)) {
+    document.querySelectorAll('.lookbook-label').forEach(label => {
+      if (label.textContent === 'Styling reference') label.textContent = 'C1 / AI styling reference';
+    });
   }
   sync();
 })();
