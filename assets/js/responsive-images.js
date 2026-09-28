@@ -30,6 +30,11 @@
         : image.closest('.lookbook-card')
           ? '(max-width: 700px) 92vw, 46vw'
           : '(max-width: 700px) 92vw, 55vw';
+    } else {
+      // A product view can switch from a responsive on-model image to a source-only frame image.
+      // Clear the previous responsive candidate so it cannot override the newly assigned src.
+      image.removeAttribute('srcset');
+      image.removeAttribute('sizes');
     }
     image.dataset.responsiveSource = source;
   }
