@@ -38,19 +38,25 @@
   }));
   if (!document.querySelector('#buyer-tools-style')) {
     const css = document.createElement('style'); css.id = 'buyer-tools-style';
-    css.textContent = '.main-image:after{content:var(--current-view)!important}.buyer-note{margin-top:16px;color:var(--muted);font-size:12px;line-height:1.6}.product-lightbox{max-width:95vw;max-height:95vh;padding:12px;border:0}.product-lightbox::backdrop{background:#000b}.product-lightbox img{max-width:85vw;max-height:80vh;object-fit:contain}.product-lightbox button{display:block;margin-left:auto;padding:10px}.main-image>img{cursor:zoom-in}';
+    css.textContent = '.main-image:after{content:var(--current-view)!important}.buyer-note{margin-top:16px;color:var(--muted);font-size:12px;line-height:1.6}.product-lightbox{position:relative;max-width:95vw;max-height:95vh;padding:12px;border:0;background:#fff}.product-lightbox::backdrop{background:#000b;cursor:zoom-out}.product-lightbox img{display:block;max-width:85vw;max-height:80vh;object-fit:contain}.product-lightbox button{position:absolute;top:18px;right:18px;z-index:1;width:36px;height:36px;border:0;border-radius:50%;background:var(--ink);color:#fff;font-size:0;cursor:pointer}.product-lightbox button:before,.product-lightbox button:after{content:"";position:absolute;top:17px;left:10px;width:16px;height:2px;background:currentColor}.product-lightbox button:before{transform:rotate(45deg)}.product-lightbox button:after{transform:rotate(-45deg)}.main-image>img{cursor:zoom-in}';
     document.head.append(css);
   }
   document.querySelectorAll('.lookbook img').forEach(img => {img.loading='lazy'; img.decoding='async';});
   const main = document.querySelector('#main-product-image');
   main.loading='eager'; main.setAttribute('fetchpriority','high');
   main.tabIndex=0; main.setAttribute('role','button'); main.setAttribute('aria-label',`Enlarge ${model} image`);
+  function closeLightboxes() {
+    document.querySelectorAll('.product-lightbox[open]').forEach((dialog) => dialog.close());
+  }
   function enlarge() {
+    closeLightboxes();
     const dialog=document.createElement('dialog'); dialog.className='product-lightbox';
-    const close=document.createElement('button'); close.textContent='Close'; close.type='button';
+    const close=document.createElement('button'); close.textContent='Close enlarged image'; close.type='button'; close.setAttribute('aria-label', 'Close enlarged image');
     const img=document.createElement('img'); img.src=main.src; img.alt=main.alt;
     dialog.append(close,img); document.body.append(dialog);
-    close.onclick=()=>dialog.close(); dialog.addEventListener('close',()=>dialog.remove()); dialog.showModal();
+    close.onclick=()=>dialog.close();
+    dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+    dialog.addEventListener('close',()=>dialog.remove()); dialog.showModal();
   }
   main.addEventListener('click',enlarge);
   main.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enlarge();}});
