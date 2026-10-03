@@ -1,5 +1,5 @@
 (() => {
-  const match = location.pathname.match(/product-((?:yg|he|d|val)\d+)\.html$/i);
+  const match = location.pathname.match(/product-([a-z0-9]+)\.html$/i);
   if (!match) return;
 
   const fiveMetalColorways = ['C1', 'C2', 'C3', 'C4', 'C5'].map((code) => ({ code, name: `${code} photographed sample` }));
@@ -109,18 +109,18 @@
     d3776: { model: 'D3776', size: ['55', '17', '144'], category: 'Metal Optical', material: 'Metal', colorways: fiveMetalColorways, main: 'front', context: { file: 'on-model', label: 'Fit reference', alt: 'D3776 metal optical frame worn by a model' } }
   };
   const slug = match[1].toLowerCase();
-  const product = products[slug];
+  const product = products[slug] || window.CARPE_METAL_PRODUCTS?.[slug] || window.CARPE_ACETATE_PRODUCTS?.[slug];
   if (product && ['val0017','val0018','val0019','val0020','val0021','val0022','val0023'].includes(slug)) product.verifiedModel = true;
   if (!product) return;
 
   // Only verified, product-specific on-model images are allowed to enter this renderer.
   const styleReferenceSlugs = new Set(['yg21285', 'yg21286', 'yg21287', 'yg21288', 'yg21289', 'yg21290', 'yg21291', 'yg78145', 'yg78146', 'yg21318', 'yg21320', 'yg78165', 'd3452', 'd3721', 'd3727', 'd3743', 'he3111', 'he3112', 'he3113', 'he3114', 'he3115', 'he3116', 'he3117', 'he3118', 'he3119', 'he3120', 'he3121']);
   if (product.verifiedModel) styleReferenceSlugs.add(slug);
-  const hasStyleReference = styleReferenceSlugs.has(slug);
+  const hasStyleReference = styleReferenceSlugs.has(slug) || product.context?.isModel === true;
   const hasVerifiedSize = Array.isArray(product.size) && product.size.length === 3;
   const [lens, bridge, temple] = product.size || [];
   const asset = (file) => {
-    if (styleReferenceSlugs.has(slug) && file === 'on-model') {
+    if ((styleReferenceSlugs.has(slug) || product.context?.isModel) && file === 'on-model') {
       return `assets/products/${slug}/${slug}-on-model-accurate.webp`;
     }
     return `assets/products/${slug}/${slug}-${file}.webp`;

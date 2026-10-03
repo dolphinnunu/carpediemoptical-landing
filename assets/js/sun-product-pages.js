@@ -1,5 +1,5 @@
 (() => {
-  const match = location.pathname.match(/product-((?:els|em)\d+)\.html$/i);
+  const match = location.pathname.match(/product-((?:els|em|glt)\d+)\.html$/i);
   if (!match) return;
 
   const products = {
@@ -35,14 +35,14 @@
     em1207: { model: 'EM1207', size: ['53', '19', '145'], front: '142', height: '52', colors: 3, onModel: true }
   };
   const slug = match[1].toLowerCase();
-  const product = products[slug];
+  const product = products[slug] || window.CARPE_GLT_PRODUCTS?.[slug];
   if (!product) return;
 
   const styleReferenceSlugs = new Set(['els8010', 'els8012', 'els8016', 'els8017', 'els8037', 'els8038', 'els8039', 'els8040', 'els8041', 'els8042', 'els8043', 'els8044', 'els8045', 'els8046', 'els8047', 'els8048', 'els8049', 'els8050', 'els8051', 'els8053', 'els8054', 'els8055', 'els8056', 'els8057', 'els8058', 'els8059', 'els8060', 'els8061', 'em1206', 'em1207']);
-  const hasStyleReference = styleReferenceSlugs.has(slug);
+  const hasStyleReference = styleReferenceSlugs.has(slug) || product.context?.isModel === true;
   const hasOnModel = Boolean(product.onModel) || hasStyleReference;
   const asset = (file) => {
-    if (styleReferenceSlugs.has(slug) && file === 'on-model') {
+    if ((styleReferenceSlugs.has(slug) || product.context?.isModel) && file === 'on-model') {
       return `assets/products/${slug}/${slug}-on-model-accurate.webp`;
     }
     return `assets/products/${slug}/${slug}-${file}.webp`;
@@ -58,17 +58,17 @@
   const onModelThumb = hasOnModel ? `<button class="thumb" type="button" data-image="${asset('on-model')}" data-color="On-model view" data-label="${hasStyleReference ? 'Lifestyle styling reference' : 'on-model fit'}"><img src="${asset('on-model')}" alt="${hasStyleReference ? 'Sunglasses lifestyle styling reference' : `${product.model} sunglasses shown on a model`}"></button>` : '';
   const colourBoardThumb = hasStyleReference ? '' : `<button class="thumb" type="button" data-image="${asset('lookbook-stack')}" data-color="Colour board" data-label="Photographed colour board"><img src="${asset('lookbook-stack')}" alt="${product.model} photographed colour board"></button>`;
 
-  document.title = `${product.model} Acetate Sunglasses | CarpeDiem Optic`;
+  document.title = `${product.model} Sunglasses | CarpeDiem Optic`;
   const metaColourCopy = hasOnModel ? `${colorsShown.length} photographed colourways` : 'four photographed colourways';
-  document.querySelector('meta[name="description"]')?.setAttribute('content', `${product.model} acetate sunglasses by CarpeDiem Optic. Explore ${metaColourCopy}, construction details and OEM or private label inquiry options.`);
+  document.querySelector('meta[name="description"]')?.setAttribute('content', `${product.model} sunglasses by CarpeDiem Optic. Explore ${metaColourCopy}, construction details and OEM or private label inquiry options.`);
   document.querySelectorAll('.brand-name').forEach((element) => { element.textContent = 'CarpeDiem Optic'; });
   document.querySelectorAll('footer').forEach((element) => { element.innerHTML = element.innerHTML.replaceAll('Carpe Diem Optic', 'CarpeDiem Optic'); });
   document.head.insertAdjacentHTML('beforeend', `<style>.main-image:before{content:'${product.model}'}.main-image:after{content:'C1 / SUN'}.main-image img{transform:none!important}.main-image.model-view img{width:90%;height:90%;object-fit:cover}</style>`);
   document.querySelector('.crumbs .wrap').innerHTML = `<a href="index.html">Home</a><span>/</span><a href="products.html?category=sun">Sun Collection</a><span>/</span>${product.model}`;
-  document.querySelector('.product-info .eyebrow').textContent = 'Acetate sunglasses / sample catalog';
+  document.querySelector('.product-info .eyebrow').textContent = 'Sunglasses / sample catalog';
   document.querySelector('.product-info h1').textContent = product.model;
   document.querySelector('.model-code').firstChild.textContent = `${product.model} / C1`;
-  document.querySelector('.intro').textContent = `An acetate sunglasses sample with a defined fashion profile and ${colorsShown.length} photographed colour directions. Review the frame, lens direction and construction details as a starting point for OEM, ODM or private label development.`;
+  document.querySelector('.intro').textContent = `A sunglasses sample with a defined fashion profile and ${colorsShown.length} photographed colour directions. Review the frame, lens direction and construction details as a starting point for OEM, ODM or private label development.`;
   document.querySelector('.status').textContent = 'Available for project discussion';
   document.querySelector('.buyer-summary').innerHTML = `<div class="buyer-summary-item"><strong>Acetate</strong><span>Frame material</span></div><div class="buyer-summary-item"><strong>${colorsShown.length}</strong><span>Colourways shown</span></div><div class="buyer-summary-item"><strong>OEM</strong><span>Project support</span></div>`;
 
@@ -78,7 +78,7 @@
   const zoomLens = document.querySelector('.zoom-lens');
   function selectImage(choice) {
     stageImage.src = choice.dataset.image;
-    stageImage.alt = `${product.model} ${choice.dataset.label || choice.dataset.color} acetate sunglasses`;
+    stageImage.alt = `${product.model} ${choice.dataset.label || choice.dataset.color} sunglasses`;
     selected.textContent = choice.dataset.color;
     stage.classList.toggle('model-view', choice.dataset.color === 'On-model view');
     imageNote.textContent = choice.dataset.color === 'Colour board' ? 'COLOUR RANGE' : choice.dataset.color === 'On-model view' ? (hasStyleReference ? 'LIFESTYLE REFERENCE' : 'FIT REFERENCE') : 'PRODUCT SAMPLE';
@@ -91,7 +91,7 @@
 
   const additionalMeasurements = product.front ? `<div class="spec"><span class="spec-key">Front width</span><span class="spec-value">${product.front} mm</span></div><div class="spec"><span class="spec-key">Frame height</span><span class="spec-value">${product.height} mm</span></div>` : '';
   document.querySelector('.technical .technical-intro').textContent = 'The information below identifies the photographed sunglasses sample. Final lens specification, colour, packaging, quantities and production terms are confirmed by project brief before ordering.';
-  document.querySelector('.specs').innerHTML = `<div class="spec"><span class="spec-key">Model</span><span class="spec-value">${product.model}</span></div><div class="spec"><span class="spec-key">Product type</span><span class="spec-value">Acetate sunglasses sample</span></div><div class="spec"><span class="spec-key">Material</span><span class="spec-value">Acetate</span></div><div class="spec"><span class="spec-key">Size shown</span><span class="spec-value">${lens} - ${bridge} - ${temple}</span></div>${additionalMeasurements}<div class="spec"><span class="spec-key">Colourways shown</span><span class="spec-value">${colorsShown.join(', ')}</span></div><div class="spec"><span class="spec-key">Project options</span><span class="spec-value">OEM, ODM, private label, packaging support</span></div><p class="notice">Product specifications shown here are for preliminary B2B discussion and subject to final confirmation.</p>`;
+  document.querySelector('.specs').innerHTML = `<div class="spec"><span class="spec-key">Model</span><span class="spec-value">${product.model}</span></div><div class="spec"><span class="spec-key">Product type</span><span class="spec-value">Sunglasses sample</span></div><div class="spec"><span class="spec-key">Material</span><span class="spec-value">Not specified in supplied materials</span></div><div class="spec"><span class="spec-key">Size shown</span><span class="spec-value">${lens} - ${bridge} - ${temple}</span></div>${additionalMeasurements}<div class="spec"><span class="spec-key">Colourways shown</span><span class="spec-value">${colorsShown.join(', ')}</span></div><div class="spec"><span class="spec-key">Project options</span><span class="spec-value">OEM, ODM, private label, packaging support</span></div><p class="notice">Product specifications shown here are for preliminary B2B discussion and subject to final confirmation.</p>`;
 
   document.querySelector('.lookbook')?.remove();
   const context = document.createElement('section');
